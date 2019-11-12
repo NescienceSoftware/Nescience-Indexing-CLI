@@ -4,6 +4,7 @@ import time
 import datetime
 import json
 import alpaca_trade_api as tradeapi
+import requests
 import ctypes
 ctypes.windll.kernel32.SetConsoleTitleW("Alpaca")
 
@@ -21,16 +22,33 @@ def setup():
 
     if configcheck != 'configured':
         assets = {}
+        API_KEY = input('API KEY:')
+        API_SECRET = input('API SECRET:')
+        SITE = input('Live or Paper trading:')
+        SITE = SITE.upper()
+        ss = False
+        while ss is False:
+            if SITE == 'PAPER':
+                SITE = 'https://paper-api.alpaca.markets'
+                ss = True
+            if SITE == 'LIVE':
+                SITE = 'https://api.alpaca.markets'
+                ss = True
+            else:
+                print('Please check your spelling and re-enter, Live or Paper:')
+                pass
+
         assetnum = input('Number of Assets in the Portfolio:')
         assetnum = int(assetnum)
         for x in range(0, assetnum):
             x = str(x + 1)
-            assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
         threshold = input("Algorithm Threshold= ")
         threshold = float(threshold)
         threshold = (.01 * threshold)
         configcheck = 'configured'
-        configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum}
+        configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
+                         'API_KEY': API_KEY, 'API_SECRET': API_SECRET, 'SITE': SITE}
         with open('alpaca/config.json', 'w') as outfile:
             json.dump(configuration, outfile)
 
@@ -38,16 +56,33 @@ def setup():
         reconfig = input('Would you like to reconfigure?  ')
         if reconfig == 'yes':
             assets = {}
+            API_KEY = input('API KEY:')
+            API_SECRET = input('API SECRET:')
+            SITE = input('Live or Paper trading:')
+            SITE = SITE.upper()
+            ss = False
+            while ss is False:
+                if SITE == 'PAPER':
+                    SITE = 'https://paper-api.alpaca.markets'
+                    ss = True
+                if SITE == 'LIVE':
+                    SITE = 'https://api.alpaca.markets'
+                    ss = True
+                else:
+                    print('Please check your spelling and re-enter, Live or Trading:')
+                    pass
+
             assetnum = input('Number of Assets in the Portfolio:')
             assetnum = int(assetnum)
             for x in range(0, assetnum):
                 x = str(x + 1)
-                assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
             threshold = input("Algorithm Threshold= ")
             threshold = float(threshold)
             threshold = (.01 * threshold)
             configcheck = 'configured'
-            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum}
+            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
+                             'API_KEY': API_KEY, 'API_SECRET': API_SECRET, 'SITE': SITE}
             with open('alpaca/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
 
@@ -58,9 +93,13 @@ def setup():
             for x in range(0, assetnum):
                 x = str(x + 1)
                 assets["asset{0}".format(x)] = config['assets']["asset{0}".format(x)]
+            API_KEY = config['API_KEY']
+            API_SECRET = config['API_SECRET']
+            SITE = config['SITE']
             threshold = config['threshold']
             configcheck = 'configured'
-            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum}
+            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
+                             'API_KEY': API_KEY, 'API_SECRET': API_SECRET, 'SITE': SITE}
             with open('alpaca/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
 
@@ -77,10 +116,26 @@ def balances():
     balance = {}
     for x in range(0, assetnum):
         x = str(x + 1)
-        try:
-            balance["balance_asset{0}".format(x)] = round(alpaca.get_position(assets[str('asset' + x)]).qty)
-        except:
-            balance["balance_asset{0}".format(x)] = 0
+        attempt = False
+        while attempt is False:
+            try:
+                balance["balance_asset{0}".format(x)] = float(alpaca.get_position(assets[str('asset' + x)]).qty)
+                balance["balance_asset{0}".format(x)] = round(balance["balance_asset{0}".format(x)])
+                attempt = True
+            except ConnectionError:
+                time.sleep(1)
+                pass
+            except requests.exceptions.HTTPError:
+                time.sleep(1)
+                pass
+            except requests.exceptions.ConnectionError:
+                time.sleep(1)
+                pass
+            except KeyError:
+                balance["balance_asset{0}".format(x)] = 0
+
+
+
     balance.update({'cash_balance': cash_balance})
     # save balances to json
     with open('alpaca/balance.json', 'w') as outfile:
@@ -93,9 +148,23 @@ def prices():
     # Grabs prices from Polygon API
 
     price = {}
+
     for x in range(0, assetnum):
         x = str(x + 1)
-        price["price_asset{0}".format(x)] = float(alpaca.polygon.last_trade(assets["asset{0}".format(x)]).price)
+        attempt = False
+        while attempt is False:
+            try:
+                price["price_asset{0}".format(x)] = float(alpaca.polygon.last_trade(assets["asset{0}".format(x)]).price)
+                attempt = True
+            except ConnectionError:
+                time.sleep(1)
+                pass
+            except requests.exceptions.ConnectionError:
+                time.sleep(1)
+                pass
+            except requests.exceptions.HTTPError:
+                time.sleep(1)
+                pass
 
     # saves to json
     with open('alpaca/prices.json', 'w') as outfile:
@@ -173,14 +242,6 @@ def buy_order(asset, buy_asset):
 
     # MAIN
 
-
-API_KEY = "PKH47JEKAPDBW0D74MAY"
-API_SECRET = "YbQgI3NpwPLHend0FcKNiXnzmND5euPewKeQfbNV"
-APCA_API_BASE_URL = "https://paper-api.alpaca.markets"
-
-alpaca = tradeapi.REST(API_KEY, API_SECRET, APCA_API_BASE_URL, 'v2')
-# allocation = .99 / len(assets)
-
 with open('alpaca/config.json') as json_file:
     config = json.load(json_file)
     configcheck = config['configcheck']
@@ -193,6 +254,12 @@ with open('alpaca/prices.json') as json_file:
     price = json.load(json_file)
 
 setup()
+
+API_KEY = config['API_KEY']
+API_SECRET = config['API_SECRET']
+SITE = config['SITE']
+
+alpaca = tradeapi.REST(API_KEY, API_SECRET, SITE, 'v2')
 
 allocation = (.985 / assetnum)
 
@@ -234,6 +301,7 @@ while count < 99999:
     # print date and asset deviations
 
     print(datetime.datetime.now().time())
+    print('Portfolio Value:' + " " + " " + str(total_usd) + " " + 'USD')
 
     for x in range(0, assetnum):
         x = str(x + 1)
@@ -289,13 +357,13 @@ while count < 99999:
 
                 # Buy order API call
                 if buy["buy_asset{0}".format(x)] < 0:
-                    buy["buy_asset{0}".format(x)] = (-1 * buy["buy_asset{0}".format(x)])
-                    sell_order(assets["asset{0}".format(x)], buy["buy_asset{0}".format(x)])
+                    sellasset = (-1 * buy["buy_asset{0}".format(x)])
+                    sell_order(assets["asset{0}".format(x)], sellasset)
             for x in range(0, assetnum):
                 x = str(x + 1)
                 if buy["buy_asset{0}".format(x)] > 0:
                     buy_order(assets["asset{0}".format(x)], buy["buy_asset{0}".format(x)])
-
+    time.sleep(4)
     balances()
     usd_value()
     deviation()
@@ -308,9 +376,6 @@ while count < 99999:
             initialcheck2 = performance['initialcheck2']
 
         if initialcheck2 != 'done':
-            global old
-            global compare
-            global profit
 
             compare = {}
             old = {}
@@ -413,3 +478,4 @@ while count < 99999:
     with open('alpaca/count.json', 'w') as outfile:
         json.dump(data3, outfile)
     time.sleep(60)
+
