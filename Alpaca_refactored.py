@@ -478,4 +478,3 @@ while count < 99999:
     with open('alpaca/count.json', 'w') as outfile:
         json.dump(data3, outfile)
     time.sleep(60)
-

@@ -5,40 +5,40 @@ if exchange == 'ALPACA':
     import Alpaca_refactored
 
 if exchange == 'UPBIT':
-    import Upbit2
+    import UpbitPeriodic
 
 if exchange == 'BINANCE':
-    import Binance2
+    import BinancePeriodic
 
 if exchange == 'BITTREX':
-    import Bittrex2
+    import BittrexPeriodic
 
 if exchange == 'BITFINEX':
-    import Bitfinex3
+    import BitfinexPeriodic
 
 if exchange == 'GDAX' or exchange == 'COINBASE' or exchange == 'COINBASE.PRO' or exchange == 'COINBASE PRO' or exchange == 'COINBASEPRO':
-    import GDAX2
+    import GDAXPeriodic
 
 if exchange == 'GEMINI':
-    import Gemini2
-
-if exchange == 'IDEX':
-    import IDEX2
+    import GeminiPeriodic
 
 if exchange == 'KUCOIN':
-    import Kucoin2
+    import KucoinPeriodic
 
 if exchange == 'POLONIEX':
-    import Poloniex2
+    import PoloniexPeriodic
 
 if exchange == 'HUOBI' or exchange == 'HUOBIPRO':
-    import Huobi2
+    import HuobiPeriodic
 
 if exchange == 'KRAKEN':
-    import Kraken
+    import KrakenPeriodic
 
-if exchange == 'BIBOX':
-    import Bibox2
+if exchange == 'LIQUID' or exchange == 'Quoine' or exchange == 'Quoinex' or exchange == 'Qryptos':
+    import LiquidPeriodic
+
+if exchange == 'OKEX':
+    import OkExPeriodic
 
 else:
     print('Please check the spelling of your exchange.')
