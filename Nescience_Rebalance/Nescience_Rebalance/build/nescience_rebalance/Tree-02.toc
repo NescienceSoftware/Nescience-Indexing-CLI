@@ -1,5 +1,0 @@
-('c:\\users\\julian\\appdata\\local\\programs\\python\\python36\\lib\\site-packages\\simplejson-3.16.0-py3.6-win-amd64.egg',
- None,
- {'*.py', '*.pyw', 'EGG-INFO', '*.pyc', '*.cp36-win_amd64.pyd', '*.pyd'},
- 'DATA',
- [])

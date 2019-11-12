@@ -524,7 +524,7 @@ if algorithm == 'THRESHOLD':
         usd_value()
 
         # Record data every half day
-        multiples = [n for n in range(1, 99999) if n % 35555 == 0]
+        multiples = [n for n in range(1, 99999) if n % 5000 == 0]
         if count in multiples:
             # Checks for previous runs and calculates gain over initial allocation
             with open('GDAX/performance.json') as json_file:

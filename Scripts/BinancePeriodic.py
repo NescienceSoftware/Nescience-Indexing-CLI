@@ -565,7 +565,7 @@ if algorithm == 'THRESHOLD':
         usd_value()
 
         # Record data every 3.5 days
-        multiples = [n for n in range(1, 99999) if n % 1000 == 0]
+        multiples = [n for n in range(1, 99999) if n % 1800 == 0]
         if count in multiples:
             # Checks for previous runs and calculates gain over initial allocation
             with open("binance/performance.json") as json_file:
