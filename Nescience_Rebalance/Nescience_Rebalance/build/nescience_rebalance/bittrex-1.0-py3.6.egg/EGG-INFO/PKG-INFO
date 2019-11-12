@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: bittrex
+Version: 1.0
+Summary: A Python wrapper for Bittrex exchange API
+Home-page: https://github.com/hanhha/bittrex
+Author: Hanh Ha
+Author-email: tranhanh.haminh@gmail.com
+License: MIT
+Description-Content-Type: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

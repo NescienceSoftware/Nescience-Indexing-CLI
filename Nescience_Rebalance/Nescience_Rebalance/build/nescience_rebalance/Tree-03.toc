@@ -1,0 +1,5 @@
+('C:\\Users\\Julian\\AppData\\Local\\Programs\\Python\\Python36\\Nescience_Rebalance\\build\\nescience_rebalance\\bittrex-1.0-py3.6.egg',
+ None,
+ {'*.py', '*.pyw', 'EGG-INFO', '*.pyc', '*.cp36-win_amd64.pyd', '*.pyd'},
+ 'DATA',
+ [])
