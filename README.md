@@ -191,7 +191,7 @@ This will allow excess profit donations to be processed properly, and without wh
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
-2. When prompted, type "Gemini" as your exchange selection. (Any previous naming scheme works)
+2. When prompted, type "Gemini" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
 
@@ -210,6 +210,41 @@ This will allow excess profit donations to be processed properly, and without wh
 #### Kraken
 
 #### Kucoin
+
+1. Go to your user profile.
+
+2. On the left side click "API Management".
+
+3. Click "Create API".
+
+4. Chose and save your API name and API password.
+
+5. Enter your trading password (Note that this is not your login or API password, but the 6 digit password required to make trades).
+
+6. Click "Send Code" and enter the code sent to your email, in addition to your 2-factor-authentication key below.
+
+7. Once the API key has been created, click "Change" right above the API Key.
+
+4. Ensure proper account privelages are enabled, general, trade, and transfer.
+
+6. Google "My IP address", enable IP whitelisting, and copy paste your IP address into the whitelist. This will ensure your API key can only be accessed using your IP address.
+
+###### Initial Setup
+1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+2. When prompted, type "Kucoin" as your exchange selection.
+
+3. Enter your API Key and API Secret when prompted.
+
+4. Determine and enter the number of assets in your rebalancing portfolio.
+
+5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+
+6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+
+7. Select either Periodic Rebalancing or Threshold Rebalancing.
+
+8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 #### Liquid
 
