@@ -72,7 +72,7 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Enable API withdrawals.
 
-###### Initial Setup
+######## Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
 2. When prompted, type "Binance" as your exchange selection.
@@ -88,13 +88,6 @@ This process is different on each exchange, with each exchange having unique res
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
-
-###### Further Operation
-Once set up, the AI/tool will operate until stopped. This can be done by either stopping the application with a keyboard command (Ctrl-C) or by exiting the application. (Command provides the safest shutdown)
-
-The AI/tool can be run in multiple instances under the same executable, so long as there is only one instance on each exchange.
-
-Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
 
 #### Bitfinex
 
@@ -120,6 +113,9 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 #### Poloniex
 
 #### Upbit
+
+#### Further Operation
+
 ---
 ## Build
 
