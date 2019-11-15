@@ -9,7 +9,7 @@
 - [Description](#description)
 - [How To Use](#how-to-use)
 - [Whitepaper](#whitepaper)
-- [Company Info](#nescience-software-&-capital,-llc)
+- [Company Info](#nescience-software-&-capital)
 
 ---
 
@@ -32,7 +32,7 @@ With our open-source portfolio management tool, an investor with no previous exp
 
 ---
 
-## Nescience Software & Capital, LLC
+## Nescience Software & Capital
 
 - Website - [Nescience Software & Capital, LLC](https://nescience.io)
 - Twitter - [@NescienceSC](https://twitter.com/jamesqquick)
