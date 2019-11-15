@@ -37,6 +37,6 @@ With our open-source portfolio management tool, an investor with no previous exp
 - Website - [Nescience Software & Capital, LLC](https://nescience.io)
 - Twitter - [@NescienceSC](https://twitter.com/jamesqquick)
 - Facebook - [@NescienceSoftware](https://www.facebook.com/NescienceSoftware)
-- 
+- Reddit - [Nescience](https://www.reddit.com/r/Nescience)
 
 [Back To The Top](#read-me-template)
