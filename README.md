@@ -41,11 +41,46 @@ To properly set up the AI the first step is to create an API key and enable prop
 This process is different on each exchange, with each exchange having unique restrictions, for exchange-specific instructions pick an exchange from the list below:
 
 - [Binance](#Binance)
+- [Bitfinex](#Bitfinex)
+- [Bittrex](#Bittrex)
+- [COINBASE.PRO](#Coinbase.pro)
+- [Gemini](#Gemini)
+- [Huobi](#Huobi)
+- [Kraken](#Kraken)
+- [Kucoin](#Kucoin)
+- [Liquid](#Liquid)
+- [OkEx](#Okex)
+- [Poloniex](#Poloniex)
+- [Upbit](#Upbit)
 
-##Binance
+#### Binance
 
 Did this work
 
+#### Bitfinex
+
+Did this work
+
+#### Bittrex
+
+#### Coinbase.Pro
+This configuration works with coinbase.pro (GDAX) and coinbase.prime.
+
+#### Gemini
+
+#### Huobi
+
+#### Kraken
+
+#### Kucoin
+
+#### Liquid
+
+#### OkEx
+
+#### Poloniex
+
+#### Upbit
 ---
 ## Build
 
