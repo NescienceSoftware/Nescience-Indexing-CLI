@@ -10,7 +10,7 @@
 - [How To Use](#how-to-use)
 - [References](#references)
 - [Whitepaper](#whitepaper)
-- [Company Info](#Nescience Software & Capital, LLC)
+- [Company Info](#nescience-software-&-capital,-LLC)
 
 ---
 
