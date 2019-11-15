@@ -33,7 +33,7 @@ With our open-source portfolio management tool, an investor with no previous exp
 Installation in the form of an executable is relatively straightforward. Download the most recent release, unzip the file, and run "Nescience_Rebalance.exe"
 
 
-Alternatively, if one feels the need to verify the integrity of a release, follow the [build](#build) guide provided below.
+Alternatively, if one feels the need to verify the integrity of a release, follow the build(#build) guide provided below.
 ---
 ## Build
 The best way to validate a new release is directly accessing the scripts provided in the "Scripts" folder.
