@@ -43,7 +43,7 @@ This process is different on each exchange, with each exchange having unique res
 - [Binance](#Binance)
 - [Bitfinex](#Bitfinex)
 - [Bittrex](#Bittrex)
-- [COINBASE.PRO](#Coinbase.pro)
+- [Coinbase.pro](#Coinbase.pro)
 - [Gemini](#Gemini)
 - [Huobi](#Huobi)
 - [Kraken](#Kraken)
