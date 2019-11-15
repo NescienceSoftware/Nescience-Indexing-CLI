@@ -55,7 +55,15 @@ This process is different on each exchange, with each exchange having unique res
 
 #### Binance
 
-Did this work
+###### API Instructions
+1. Go to your Dashboard
+2. Click Settings
+3. Go to Api Management
+4. Name your API Key, click create, and enter your 2-factor-authentication key.
+5. Approve the API creation in your email.
+6. Edit the restrictions on the page that pops up.
+7. Enable IP whitelisting, google "My IP address", and copy paste your IP address into the whitelist. This will ensure that only your IP address will be able to use the API key.
+8. Enable API withdrawals.
 
 #### Bitfinex
 
