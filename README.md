@@ -131,7 +131,79 @@ This process is different on each exchange, with each exchange having unique res
 #### Coinbase.Pro
 This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
+###### API Instructions
+1. Go to your profile.
+
+2. Go to "API Settings".
+
+3. Click "New API Key" in the upper right.
+
+4. Ensure all account privelages are enabled, view, trade, and transfer enabled.
+
+6. Create and save your API "password".
+
+7. Google "My IP address" and copy/paste your IP address into the whitelist. This will ensure your API key can only be accessed from your IP.
+
+5. Click save and enter your 2-factor-authentication key.
+
+6. You API secret will then pop up with your API key on the main API page, save your secret/key/password somewhere safe.
+
+###### Initial Setup
+1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+2. When prompted, type "GDAX, Coinbase, Coinbase.pro, etc." as your exchange selection. (Any previous naming scheme works)
+
+3. Enter your API Key, API Secret, and API password when prompted.
+
+4. Determine and enter the number of assets in your rebalancing portfolio.
+
+5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+
+6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+
+7. Select either Periodic Rebalancing or Threshold Rebalancing.
+
+8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
 #### Gemini
+
+###### API Instructions
+1. Click on "My Account" in the upper right. 
+
+2. Under My account, click on "API Settings".
+
+3. Under a primary account, click "Create a New Api Key"
+
+4. Enter your 2-factor-authentication key.
+
+4. Ensure proper account privelages are enabled, fund management and trading.
+
+6. Save your secret/key somewhere safe.
+
+7. Under "User Settings" go to "Whitelist Management" 
+
+8. Click "Add Address to Whitelist" and select "Ethereum" as the currency.
+
+9. Save "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" as the whitelisted address. 
+
+This will allow excess profit donations to be processed properly, and without whitelisting this address the AI/tool will eventually stop when it detects excess profit with no donation activated.
+
+###### Initial Setup
+1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+2. When prompted, type "Gemini" as your exchange selection. (Any previous naming scheme works)
+
+3. Enter your API Key and API Secret when prompted.
+
+4. Determine and enter the number of assets in your rebalancing portfolio.
+
+5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+
+6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+
+7. Select either Periodic Rebalancing or Threshold Rebalancing.
+
+8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 #### Huobi
 
