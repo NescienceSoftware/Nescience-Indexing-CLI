@@ -10,7 +10,7 @@
 - [How To Use](#how-to-use)
 - [References](#references)
 - [Whitepaper](#whitepaper)
-- [Author Info](#author-info)
+- [Company Info](#Nescience Software & Capital, LLC)
 
 ---
 
@@ -33,9 +33,11 @@ With our open-source portfolio management tool, an investor with no previous exp
 
 ---
 
-## Author Info
+## Nescience Software & Capital, LLC
 
-- Twitter - [@jamesqquick](https://twitter.com/jamesqquick)
-- Website - [James Q Quick](https://jamesqquick.com)
+- Website - [Nescience Software & Capital, LLC](https://nescience.io)
+- Twitter - [@NescienceSC](https://twitter.com/jamesqquick)
+- Facebook - [@NescienceSoftware](https://www.facebook.com/NescienceSoftware)
+- 
 
 [Back To The Top](#read-me-template)
