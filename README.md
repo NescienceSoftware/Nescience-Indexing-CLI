@@ -258,7 +258,7 @@ This will allow excess profit donations to be processed properly, and without wh
 
 Once set up, the AI/tool will operate until stopped. This can be done by either stopping the application with a keyboard command (Ctrl-C) or by exiting the application. (Command provides the safest shutdown)
 
-The AI/tool can be run in multiple instances under the same executable, so long as there is only one instance on each exchange.
+The AI/tool can be run in multiple instances under the same executable, provided there is only one instance per exchange.
 
 Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
 
