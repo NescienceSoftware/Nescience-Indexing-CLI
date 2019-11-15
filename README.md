@@ -39,7 +39,7 @@ Alternatively, if one feels the need to verify the integrity of a release, follo
 ## Build
 
 
-The best way to validate a new release is directly accessing the scripts provided in the "Scripts" folder.
+The best way to validate a new release is to directly access the scripts provided in the "Scripts" folder.
 
 ---
 
