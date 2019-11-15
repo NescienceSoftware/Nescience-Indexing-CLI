@@ -8,9 +8,8 @@
 
 - [Description](#description)
 - [How To Use](#how-to-use)
-- [References](#references)
 - [Whitepaper](#whitepaper)
-- [Company Info](#nescience-software-&-capital,-LLC)
+- [Company Info](#nescience-software-&-capital,-llc)
 
 ---
 
