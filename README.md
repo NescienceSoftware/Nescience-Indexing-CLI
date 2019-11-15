@@ -57,13 +57,44 @@ This process is different on each exchange, with each exchange having unique res
 
 ###### API Instructions
 1. Go to your Dashboard
+
 2. Click Settings
+
 3. Go to Api Management
+
 4. Name your API Key, click create, and enter your 2-factor-authentication key.
+
 5. Approve the API creation in your email.
+
 6. Edit the restrictions on the page that pops up.
+
 7. Enable IP whitelisting, google "My IP address", and copy paste your IP address into the whitelist. This will ensure that only your IP address will be able to use the API key.
+
 8. Enable API withdrawals.
+
+###### Initial Setup
+1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+2. When prompted, type "Binance" as your exchange selection.
+
+3. Enter your API Key and API Secret when prompted.
+
+4. Determine and enter the number of assets in your rebalancing portfolio.
+
+5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+
+6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+
+7. Select either Periodic Rebalancing or Threshold Rebalancing.
+
+8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+###### Further Operation
+Once set up, the AI/tool will operate until stopped. This can be done by either stopping the application with a keyboard command (Ctrl-C) or by exiting the application. (Command provides the safest shutdown)
+
+The AI/tool can be run in multiple instances under the same executable, so long as there is only one instance on each exchange.
+
+Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
 
 #### Bitfinex
 
