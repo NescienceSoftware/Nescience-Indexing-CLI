@@ -30,10 +30,21 @@ With our open-source portfolio management tool, an investor with no previous exp
 
 #### Installation
 
-Installation in the form of an executable is relatively straightforward. Download the most recent release, unzip the file, and run "Nescience_Rebalance.exe"
+Installation in the form of an executable is relatively straightforward. Download the most recent release, unzip the file, and run "Nescience_Rebalance.exe".
 
 Alternatively, if one feels the need to verify the integrity of a release, follow the [build](#build) guide provided below.
 
+#### Setup
+
+To properly set up the AI the first step is to create an API key and enable proper key authorizations. 
+
+This process is different on each exchange, with each exchange having unique restrictions, for exchange-specific instructions pick an exchange from the list below:
+
+- [Binance](#Binance)
+
+##Binance
+
+Did this work
 
 ---
 ## Build
