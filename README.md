@@ -91,10 +91,14 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+[Back To The Top](#read-me-template)
+
 #### Bitfinex
+
 
 ###### API Instructions
 
+[Back To The Top](#read-me-template)
 
 #### Bittrex
 
@@ -127,6 +131,8 @@ This process is different on each exchange, with each exchange having unique res
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+[Back To The Top](#read-me-template)
 
 #### Coinbase.Pro
 This configuration works with coinbase.pro (GDAX) and coinbase.prime.
@@ -164,6 +170,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+[Back To The Top](#read-me-template)
 
 #### Gemini
 
@@ -205,11 +213,19 @@ This will allow excess profit donations to be processed properly, and without wh
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+[Back To The Top](#read-me-template)
+
 #### Huobi
+
+[Back To The Top](#read-me-template)
 
 #### Kraken
 
+[Back To The Top](#read-me-template)
+
 #### Kucoin
+
+###### API Instructions
 
 1. Go to your user profile.
 
@@ -246,13 +262,23 @@ This will allow excess profit donations to be processed properly, and without wh
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+[Back To The Top](#read-me-template)
+
 #### Liquid
+
+[Back To The Top](#read-me-template)
 
 #### OkEx
 
+[Back To The Top](#read-me-template)
+
 #### Poloniex
 
+[Back To The Top](#read-me-template)
+
 #### Upbit
+
+[Back To The Top](#read-me-template)
 
 ## Further Operation
 
@@ -262,11 +288,15 @@ The AI/tool can be run in multiple instances under the same executable, provided
 
 Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
 
+[Back To The Top](#read-me-template)
+
 ---
 ## Build
 
 
 The best way to validate a new release is to directly access the scripts provided in the "Scripts" folder.
+
+[Back To The Top](#read-me-template)
 
 ---
 
