@@ -22,7 +22,6 @@ With our open-source portfolio management tool, an investor with no previous exp
 - [Mission Statement](https://nescience.io/wp-content/uploads/2019/11/Nescience_Cover.pdf)
 - [Rebalancing Whitepaper](https://nescience.io/wp-content/uploads/2019/11/Nescience_Rebalance_Whitepaper.pdf)
 
-[Back To The Top](#read-me-template)
 
 ---
 
@@ -91,14 +90,14 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Bitfinex
 
 
 ###### API Instructions
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Bittrex
 
@@ -132,7 +131,7 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Coinbase.Pro
 This configuration works with coinbase.pro (GDAX) and coinbase.prime.
@@ -171,7 +170,7 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Gemini
 
@@ -213,15 +212,15 @@ This will allow excess profit donations to be processed properly, and without wh
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Huobi
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Kraken
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Kucoin
 
@@ -262,23 +261,23 @@ This will allow excess profit donations to be processed properly, and without wh
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Liquid
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### OkEx
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Poloniex
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 #### Upbit
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 ## Further Operation
 
@@ -288,7 +287,7 @@ The AI/tool can be run in multiple instances under the same executable, provided
 
 Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 ---
 ## Build
@@ -296,7 +295,7 @@ Should there be a need for multiple instances on the same exchange, there need t
 
 The best way to validate a new release is to directly access the scripts provided in the "Scripts" folder.
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
 
 ---
 
@@ -307,4 +306,4 @@ The best way to validate a new release is to directly access the scripts provide
 - Facebook - [@NescienceSoftware](https://www.facebook.com/NescienceSoftware)
 - Reddit - [Nescience](https://www.reddit.com/r/Nescience)
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#table-of-contents)
