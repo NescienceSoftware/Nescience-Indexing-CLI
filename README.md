@@ -102,7 +102,7 @@ This process is different on each exchange, with each exchange having unique res
 
 3. Click "Create New Key".
 
-4. Ensure all account privledges are enabled, importantly read/write capabilities for orders, wallets, and withdrawals.
+4. Ensure all account privileges are enabled, importantly read/write capabilities for orders, wallets, and withdrawals.
 
 5. Name your API Key, click generate and confirm API Key creation using the link sent to your email.
 
@@ -120,7 +120,7 @@ This process is different on each exchange, with each exchange having unique res
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
-2. When prompted, type "Kraken" as your exchange selection.
+2. When prompted, type "Bitfinex" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
 
@@ -147,7 +147,7 @@ This process is different on each exchange, with each exchange having unique res
 
 3. Click "New Key"
 
-4. Ensure all account privelages are enabled, read, trade, and withdrawal enabled.
+4. Ensure all account privileges are enabled, read, trade, and withdrawal enabled.
 
 5. Click save and enter your 2-factor-authentication key.
 
@@ -182,7 +182,7 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 3. Click "New API Key" in the upper right.
 
-4. Ensure all account privelages are enabled, view, trade, and transfer enabled.
+4. Ensure all account privileges are enabled, view, trade, and transfer enabled.
 
 6. Create and save your API "password".
 
@@ -222,7 +222,7 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 4. Enter your 2-factor-authentication key.
 
-4. Ensure proper account privelages are enabled, fund management and trading.
+4. Ensure proper account privileges are enabled, fund management and trading.
 
 6. Save your secret/key somewhere safe.
 
@@ -259,7 +259,7 @@ This will allow excess profit donations to be processed properly, and without wh
 
 2. On the left side click "API Management".
 
-3. Name the key in "notes" and enable all API privelages, read, withdraw, and trade.
+3. Name the key in "notes" and enable all API privileges, read, withdraw, and trade.
 
 4. Google "My IP Address" and copy/paste your IP address into the IP bind field. This will ensure your API Key can only be accessed using your IP address.
 
@@ -309,7 +309,7 @@ This will allow excess profit donations to be processed properly, and without wh
 
 3. Click "Generate New Key".
 
-4. Name your API Key and enable all privledges for funds control and trading. (Including withdrawals)
+4. Name your API Key and enable all privileges for funds control and trading. (Including withdrawals)
 
 5. Save your API Key and Api Secret somewhere safe.
 
@@ -359,7 +359,7 @@ This will allow excess profit donations to be processed properly, and without wh
 
 7. Once the API key has been created, click "Change" right above the API Key.
 
-8. Ensure proper account privelages are enabled, general, trade, and transfer.
+8. Ensure proper account privileges are enabled, general, trade, and transfer.
 
 9. Google "My IP address", enable IP whitelisting, and copy paste your IP address into the whitelist. This will ensure your API key can only be accessed using your IP address.
 
@@ -427,6 +427,10 @@ This will allow excess profit donations to be processed properly, and without wh
 
 #### OkEx
 
+Due to jurisdiction restrictions we are currently unable to provide specific instructions for API creation on this exchange.
+
+However if you would like to utilize our AI on this exchange, ensure that all API privileges are enabled (including withdrawls), and that if the account requires withdrawal whitelisting, that ETH withdrawals to "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" are whitelisted.
+
 [Back To The Top](#table-of-contents)
 
 #### Poloniex
@@ -471,6 +475,10 @@ This will allow excess profit donations to be processed properly, and without wh
 [Back To The Top](#table-of-contents)
 
 #### Upbit
+
+Due to jurisdiction restrictions we are currently unable to provide specific instructions for API creation on this exchange.
+
+However if you would like to utilize our AI on this exchange, ensure that all API privileges are enabled (including withdrawls), and that if the account requires withdrawal whitelisting, that ETH withdrawals to "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" are whitelisted.
 
 [Back To The Top](#table-of-contents)
 
