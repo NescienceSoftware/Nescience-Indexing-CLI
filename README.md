@@ -232,7 +232,7 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 9. Save "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" as the whitelisted address. 
 
-This will allow excess profit donations to be processed properly, and without whitelisting this address the AI/tool will eventually stop when it detects excess profit with no donation activated.
+*This will allow excess profit donations to be processed properly, and without whitelisting this address the AI/tool will eventually stop when it detects excess profit with no donation activated.*
 
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
