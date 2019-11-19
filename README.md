@@ -142,8 +142,6 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-###### API Instructions
-
 [Back To The Top](#table-of-contents)
 
 ---
