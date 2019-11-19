@@ -519,18 +519,19 @@ Should there be a need for multiple instances on the same exchange, there need t
 ----------------------------
 ## Build
 
-To ensure that the most recent release is genuine check that the PGP-signature is that of Nescience Software & Capital.
+To ensure that the most recent release is genuine, check that the PGP-signature is that of Nescience Software & Capital.
 
 Further, the best way to validate a new release is to build/compile the application yourself based on the Python scripts provided in the "Scripts" folder, while inspecting any new changes. This requires Python 3.5+ and a number of dependencies, and can be done following the steps below:
 
-  1. If you do not already have Python 3.5+ as can be found here (https://www.python.org/downloads/)
+  1. If you do not already have Python 3.5+ install an appropriate version as can be found here. (https://www.python.org/downloads/)
   
-  2. Using this command, download pip (pythons package installation tool).
+  2. Open a command prompt and using these commands, download and install pip (pythons package installation tool).
   
     
     
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     
+    python get-pip.py
     
     
   3. Ensure each dependency listed in "Dependencies.txt" are installed using pip.
