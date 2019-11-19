@@ -52,6 +52,8 @@ This process is different on each exchange, with each exchange having unique res
 - [Poloniex](#Poloniex)
 - [Upbit](#Upbit)
 
+- [Alpaca](#Alpaca) NOTE: For legal reasons we do not provide the same level of support to those utilizing traditional market clearinghouse exchanges, use of our product does not constitute liability. 
+
 #### Binance
 
 ###### API Instructions
@@ -504,6 +506,34 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 [Back To The Top](#table-of-contents)
 
+---
+
+#### Alpaca
+
+The Alpaca exchange is a clearinghouse for traditional equities that primarily supports algorithmic trading. 
+
+If interested, https://docs.alpaca.markets/ 
+
+Remember to save your API Key and API Secret somewhere safe!
+
+###### Initial Setup
+
+1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+2. When prompted, type "Alpaca" as your exchange selection.
+
+3. Enter your API Key and API Secret when prompted.
+
+4. Determine and enter the number of assets in your rebalancing portfolio.
+
+6. Input your asset selections based on Symbol (e.g. Target: TGT, AMD: AMD, NVIDIA: NVDA)
+
+7. Select either Periodic Rebalancing or Threshold Rebalancing.
+
+8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+[Back To The Top](#table-of-contents)
+
 -----------------------------------------
 
 ## Further Operation
@@ -512,7 +542,7 @@ Once set up, the AI/tool will operate until stopped. This can be done by either 
 
 The AI/tool can be run in multiple instances under the same executable, provided there is only one instance per exchange.
 
-Should there be a need for multiple instances on the same exchange, there need to be unique installations of the tool.
+Should there be a need for multiple instances on the same exchange, there need to be unique installations of the AI/tool.
 
 [Back To The Top](#table-of-contents)
 
