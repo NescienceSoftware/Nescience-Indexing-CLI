@@ -502,26 +502,42 @@ Further, the best way to validate a new release is to build/compile the applicat
   1. If you do not already have Python 3.5+ as can be found here (https://www.python.org/downloads/)
   
   2. Using this command, download pip (pythons package installation tool).
+  
     ```
+    
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    
     ```
+    
   3. Ensure each dependency listed in "Dependencies.txt" are installed using pip.
+  
     ```
+    
     pip install 'package==version"
+    
     ```
+    
   4. For each exchange you would like to use, in your "Scripts" folder generate an additional folder with the name of the exchange.
      (Coinbase= "GDAX", Binance = "Binance", Kucoin= "Kucoin", Kraken= "Kraken", etc.)
      
   5. In each folder, create 2 JSON files with the following titles and information:
           1. Title: "Config"
               Content: 
+              
               ```
+              
               {"configcheck": ""}
+              
               ```
+              
           2. Title: "Initial"
+          
               Content:
+              
               ```
+              
               {"initialcheck2": ""}
+              
               ```
   
   4. Using the packaging tool of your choice (Most reccommended is Pyinstaller),
