@@ -542,13 +542,21 @@ __At this point, the scripts will function if called using Python, run "Nescienc
 __If you would like a complete executable follow the steps below__
     
     
-  6. Using the packaging tool of your choice (the most reccommended is Pyinstaller), compile/package the MAIN script, "Nescience_Rebalance". The steps to do so are different depending on system specifics and the packaging tool chosen. 
+  Using the packaging tool of your choice, compile/package the MAIN script, "Nescience_Rebalance". 
   
-  __NOTE:__
+  The steps to do so are different depending on system specifics and the packaging tool chosen. 
+  
+  Pyinstaller : https://pyinstaller.readthedocs.io/en/stable/
+  
+  CxFreeze : https://cx-freeze.readthedocs.io/en/latest/
+  
+  Py2Exe : https://python101.pythonlibrary.org/chapter40_py2exe.html
+  
+   __NOTE:__
   
    If the tool chosen does not recursively search for modules, ensure each script in the "Scripts" folder is included. 
 
-   If the folders you created are not included, ensure that they are located in the same folder as your Nescience_Rebalance python script or executable. 
+   If the folders you created are not included, ensure that they are located in the same folder as your Nescience_Rebalance python  script or executable. 
 
    If using Pyinstaller, we have found that strptime.py is commonly not imported, if you run into this issue simply add strptime.py to the data field of the spec file.
 
