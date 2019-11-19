@@ -4,6 +4,10 @@
 
 ---
 
+### [Whitepaper](https://nescience.io/wp-content/uploads/2019/11/Nescience_Rebalance_Whitepaper.pdf)
+
+---
+
 ### Table of Contents
 
 - [Description](#description)
