@@ -521,25 +521,19 @@ Further, the best way to validate a new release is to build/compile the applicat
      (Coinbase= "GDAX", Binance = "Binance", Kucoin= "Kucoin", Kraken= "Kraken", etc.)
      
   5. In each folder, create 2 JSON files with the following titles and information:
-          1. Title: "Config"
-              Content: 
-              
-              ```
-              
-              {"configcheck": ""}
-              
-              ```
-              
-          2. Title: "Initial"
-          
-              Content:
-              
-              ```
-              
-              {"initialcheck2": ""}
-              
-              ```
   
+1. Title: "Config"
+    Content:   
+    ```
+    {"configcheck": ""}
+    ```
+2. Title: "Initial:
+    Content:
+    ```
+    {"initialcheck2": ""}
+    ```
+
+            
   4. Using the packaging tool of your choice (Most reccommended is Pyinstaller),
 
 
