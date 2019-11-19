@@ -522,6 +522,8 @@ Further, the best way to validate a new release is to build/compile the applicat
      
   5. In each folder, create 2 JSON files with the following titles and the following content:
   
+----------------------  
+  
 1. Title: "Config"
 
     Content:   
@@ -535,15 +537,13 @@ Further, the best way to validate a new release is to build/compile the applicat
     {"initialcheck2": ""}
     ```
 
-    
+----------------------  
+
 __At this point, the scripts will function if called using Python, run "Nescience_rebalance.py" and chose your exchange!__
     
     
-__If you would like a complete executable follow the steps below__
+__If you would like a complete executable follow the one of the guides below__
     
-    
-  Using the packaging tool of your choice, compile/package the MAIN script, "Nescience_Rebalance". 
-  
   The steps to do so are different depending on system specifics and the packaging tool chosen. 
   
   Pyinstaller : https://pyinstaller.readthedocs.io/en/stable/
@@ -553,6 +553,8 @@ __If you would like a complete executable follow the steps below__
   Py2Exe : https://python101.pythonlibrary.org/chapter40_py2exe.html
   
    __NOTE:__
+   
+   Using the packaging tool of your choice, target the MAIN script, "Nescience_Rebalance" as the script to be compiled.
   
    If the tool chosen does not recursively search for modules, ensure each script in the "Scripts" folder is included. 
 
