@@ -520,23 +520,36 @@ Further, the best way to validate a new release is to build/compile the applicat
   4. For each exchange you would like to use, in your "Scripts" folder generate an additional folder with the name of the exchange.
      (Coinbase= "GDAX", Binance = "Binance", Kucoin= "Kucoin", Kraken= "Kraken", etc.)
      
-  5. In each folder, create 2 JSON files with the following titles and information:
+  5. In each folder, create 2 JSON files with the following titles and the following content:
   
 1. Title: "Config"
+
     Content:   
     ```
     {"configcheck": ""}
     ```
 2. Title: "Initial:
+
     Content:
     ```
     {"initialcheck2": ""}
     ```
 
-            
-  4. Using the packaging tool of your choice (Most reccommended is Pyinstaller),
+    
+** At this point, the scripts will function if called using Python, run "Nescience_rebalance.py" and chose your exchange!    **
+    
+    
+** If you would like a complete executable follow the steps below*
+    
+  6. Using the packaging tool of your choice (the most reccommended is Pyinstaller), compile/package the MAIN script, "Nescience_Rebalance". The steps to do so are different depending on system specifics and the packaging tool chosen. 
+  
+  NOTE:
+  
+  If the tool chosen does not recursively search for modules, ensure each script in the "Scripts" folder is included. 
 
-
+  If the folders you created are not included, ensure that they are located in the same folder as your Nescience_Rebalance python script or executable. 
+  
+  If using Pyinstaller, we have found that strptime.py is commonly not imported, if you run into this issue simply add strptime.py to the data field of the spec file.
 
 [Back To The Top](#table-of-contents)
 
