@@ -546,11 +546,11 @@ __If you would like a complete executable follow the steps below__
   
   __NOTE:__
   
-    If the tool chosen does not recursively search for modules, ensure each script in the "Scripts" folder is included. 
+   If the tool chosen does not recursively search for modules, ensure each script in the "Scripts" folder is included. 
 
-    If the folders you created are not included, ensure that they are located in the same folder as your Nescience_Rebalance python script or executable. 
+   If the folders you created are not included, ensure that they are located in the same folder as your Nescience_Rebalance python script or executable. 
 
-    If using Pyinstaller, we have found that strptime.py is commonly not imported, if you run into this issue simply add strptime.py to the data field of the spec file.
+   If using Pyinstaller, we have found that strptime.py is commonly not imported, if you run into this issue simply add strptime.py to the data field of the spec file.
 
 [Back To The Top](#table-of-contents)
 
