@@ -495,8 +495,38 @@ Should there be a need for multiple instances on the same exchange, there need t
 ---
 ## Build
 
+To ensure that the most recent release is genuine check that the PGP-signature is that of Nescience Software & Capital.
 
-The best way to validate a new release is to directly access the scripts provided in the "Scripts" folder.
+Further, the best way to validate a new release is to build/compile the application yourself based on the Python scripts provided in the "Scripts" folder, while inspecting any new changes. This requires Python 3.5+ and a number of dependencies, and can be done following the steps below:
+
+  1. If you do not already have Python 3.5+ as can be found here (https://www.python.org/downloads/)
+  
+  2. Using this command, download pip (pythons package installation tool).
+    ```
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    ```
+  3. Ensure each dependency listed in "Dependencies.txt" are installed using pip.
+    ```
+    pip install 'package==version"
+    ```
+  4. For each exchange you would like to use, in your "Scripts" folder generate an additional folder with the name of the exchange.
+     (Coinbase= "GDAX", Binance = "Binance", Kucoin= "Kucoin", Kraken= "Kraken", etc.)
+     
+  5. In each folder, create 2 JSON files with the following titles and information:
+          1. Title: "Config"
+              Content: 
+              ```
+              {"configcheck": ""}
+              ```
+          2. Title: "Initial"
+              Content:
+              ```
+              {"initialcheck2": ""}
+              ```
+  
+  4. Using the packaging tool of your choice (Most reccommended is Pyinstaller),
+
+
 
 [Back To The Top](#table-of-contents)
 
