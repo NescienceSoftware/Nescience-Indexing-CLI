@@ -481,7 +481,7 @@ Due to jurisdiction restrictions we are currently unable to provide specific ins
 However if you would like to utilize our AI on this exchange, ensure that all API privileges are enabled (including withdrawls), and that if the account requires withdrawal whitelisting, ETH withdrawals to "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" are whitelisted.
 
 [Back To The Top](#table-of-contents)
-
+-----------------------------------------
 ## Further Operation
 
 Once set up, the AI/tool will operate until stopped. This can be done by either stopping the application with a keyboard command (Ctrl-C) or by exiting the application. (Command provides the safest shutdown)
@@ -492,7 +492,7 @@ Should there be a need for multiple instances on the same exchange, there need t
 
 [Back To The Top](#table-of-contents)
 
----
+----------------------------
 ## Build
 
 To ensure that the most recent release is genuine check that the PGP-signature is that of Nescience Software & Capital.
@@ -530,7 +530,7 @@ Further, the best way to validate a new release is to build/compile the applicat
     ```
     {"configcheck": ""}
     ```
-2. Title: "Initial:
+2. Title: "Initial"
 
     Content:
     ```
@@ -564,7 +564,7 @@ __If you would like a complete executable follow the one of the guides below__
 
 [Back To The Top](#table-of-contents)
 
----
+-----------------------------------
 
 ## Nescience Software & Capital, LLC
 
