@@ -627,6 +627,9 @@ __If you would like a complete executable follow the one of the guides below__
 
 ## Nescience Software & Capital, LLC
 
+Nescience Software & Capital is a portfolio management firm focused on advanced cryptocurrency portfolio management tools, facilitating investment with significantly reduced risk and more consistent long-term growth.
+
+
 - Website - [Nescience Software & Capital, LLC](https://nescience.io)
 - Twitter - [@NescienceSC](https://twitter.com/jamesqquick)
 - Facebook - [@NescienceSoftware](https://www.facebook.com/NescienceSoftware)
