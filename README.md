@@ -451,6 +451,8 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Poloniex
 
 ###### API Instructions
