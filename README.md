@@ -421,7 +421,7 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 6. Back on your API Tokens page, click "Create API Token".
 
-7. Ensure all account prevelages are enabled, both read and write.
+7. Ensure all account privilege are enabled, both read and write.
 
 8. Enter your 2-factor-authentication key and click "Create Token"
 
