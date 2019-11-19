@@ -92,6 +92,8 @@ This process is different on each exchange, with each exchange having unique res
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Bitfinex
 
 ###### API Instructions
@@ -138,6 +140,8 @@ This process is different on each exchange, with each exchange having unique res
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Bittrex
 
 ###### API Instructions
@@ -171,6 +175,8 @@ This process is different on each exchange, with each exchange having unique res
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 [Back To The Top](#table-of-contents)
+
+---
 
 #### Coinbase.Pro
 This configuration works with coinbase.pro (GDAX) and coinbase.prime.
@@ -210,6 +216,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 [Back To The Top](#table-of-contents)
+
+---
 
 #### Gemini
 
@@ -252,6 +260,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 [Back To The Top](#table-of-contents)
+
+---
 
 #### Huobi
 
@@ -299,6 +309,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Kraken
 
 ###### API Instructions
@@ -340,6 +352,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 [Back To The Top](#table-of-contents)
+
+---
 
 #### Kucoin
 
@@ -383,6 +397,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Liquid
 
 ###### API Instructions
@@ -424,6 +440,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
 [Back To The Top](#table-of-contents)
+
+---
 
 #### OkEx
 
@@ -474,6 +492,8 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 [Back To The Top](#table-of-contents)
 
+---
+
 #### Upbit
 
 Due to jurisdiction restrictions we are currently unable to provide specific instructions for API creation on this exchange.
@@ -481,7 +501,9 @@ Due to jurisdiction restrictions we are currently unable to provide specific ins
 However if you would like to utilize our AI on this exchange, ensure that all API privileges are enabled (including withdrawls), and that if the account requires withdrawal whitelisting, ETH withdrawals to "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C" are whitelisted.
 
 [Back To The Top](#table-of-contents)
+
 -----------------------------------------
+
 ## Further Operation
 
 Once set up, the AI/tool will operate until stopped. This can be done by either stopping the application with a keyboard command (Ctrl-C) or by exiting the application. (Command provides the safest shutdown)
