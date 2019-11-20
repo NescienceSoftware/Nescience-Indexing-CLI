@@ -593,7 +593,7 @@ Further, the best way to validate a new release is to build/compile the applicat
 
     Content:
     ```
-    {"initialcheck2": ""}
+    {"initialcheck": "", "initialcheck2": ""}
     ```
 
 ----------------------  
