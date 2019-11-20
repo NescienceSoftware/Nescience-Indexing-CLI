@@ -84,6 +84,8 @@ This process is different on each exchange, with each exchange having unique res
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
+
 2. When prompted, type "Binance" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
@@ -130,6 +132,8 @@ This process is different on each exchange, with each exchange having unique res
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
+
 2. When prompted, type "Bitfinex" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
@@ -165,6 +169,8 @@ This process is different on each exchange, with each exchange having unique res
 
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Bittrex" as your exchange selection.
 
@@ -206,6 +212,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "GDAX, Coinbase, Coinbase.pro, etc." as your exchange selection. (Any previous naming scheme works)
 
@@ -250,6 +258,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 ###### Initial Setup
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Gemini" as your exchange selection.
 
@@ -299,6 +309,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
+
 2. When prompted, type "Huobi" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
@@ -342,6 +354,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 ###### Initial Setup
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Kraken" as your exchange selection.
 
@@ -387,6 +401,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
+
 2. When prompted, type "Kucoin" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
@@ -430,6 +446,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 ###### Initial Setup
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Liquid" as your exchange selection.
 
@@ -484,6 +502,8 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
+
 2. When prompted, type "Poloniex" as your exchange selection.
 
 3. Enter your API Key and API Secret when prompted.
@@ -523,6 +543,8 @@ Remember to save your API Key and API Secret somewhere safe!
 ###### Initial Setup
 
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+
+*Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Alpaca" as your exchange selection.
 
