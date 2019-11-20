@@ -71,7 +71,7 @@ def setup():
                              'algorithm': algorithm}
             with open('binance/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        else:
+        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
             print('Please check the spelling of' + " " + algorithm)
             exit(0)
     else:
@@ -144,7 +144,8 @@ def setup():
                                  'algorithm': algorithm}
                 with open('binance/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
+
+            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
                 print('Please check the spelling of' + " " + algorithm)
                 exit(0)
 
@@ -443,14 +444,12 @@ allocation = (.99 / assetnum)
 with open('binance/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
-with open('binance/balance.json') as json_file:
-    balance = json.load(json_file)
-with open('binance/prices.json') as json_file:
-    price = json.load(json_file)
 
 if initialcheck != 'done':
     initial = {}
     balances()
+    with open('binance/balance.json') as json_file:
+        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
@@ -480,6 +479,11 @@ if algorithm == 'THRESHOLD':
         balances()
 
         prices()
+
+        with open('binance/balance.json') as json_file:
+            balance = json.load(json_file)
+        with open('binance/prices.json') as json_file:
+            price = json.load(json_file)
 
         usd_value()
 
@@ -771,6 +775,11 @@ if algorithm == 'PERIODIC':
 
             prices()
 
+            with open('binance/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('binance/prices.json') as json_file:
+                price = json.load(json_file)
+
             usd_value()
 
             deviation()
@@ -1017,6 +1026,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('binance/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('binance/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 
@@ -1265,6 +1279,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('binance/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('binance/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 

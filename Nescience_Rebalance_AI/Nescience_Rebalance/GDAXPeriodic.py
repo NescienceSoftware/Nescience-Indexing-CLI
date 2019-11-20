@@ -65,7 +65,7 @@ def setup():
                              'API_PASSWORD': API_PASSWORD, 'algorithm': algorithm}
             with open('GDAX/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        else:
+        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
             print('Please check the spelling of' + " " + algorithm)
             exit(0)
 
@@ -100,7 +100,7 @@ def setup():
                 new_balances = client.get_accounts()
             except OSError:
                 time.sleep(3)
-                balances = client.get_accounts()
+                new_balances = client.get_accounts()
             # Get Balances of each previously entered asset
             new_balance = {}
             for x in range(0, assetnum):
@@ -110,7 +110,7 @@ def setup():
                         new_balance['balance_asset{0}'.format(x)] = b['balance']
                         new_balance["balance_asset{0}".format(x)] = float(new_balance["balance_asset{0}".format(x)])
                     if "balance_asset{0}".format(x) not in new_balance:
-                        balance["balance_asset{0}".format(x)] = 0
+                        new_balance["balance_asset{0}".format(x)] = 0
                     if b['currency'] == stablecoin:
                         new_balance["cash_balance"] = b['balance']
                         old_cash = float(new_balance['cash_balance'])
@@ -151,7 +151,7 @@ def setup():
                                  'API_PASSWORD': API_PASSWORD, 'algorithm': algorithm}
                 with open('GDAX/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
+            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
                 print('Please check the spelling of' + " " + algorithm)
                 exit(0)
 
@@ -402,14 +402,12 @@ allocation = (.99 / assetnum)
 with open('GDAX/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
-with open('GDAX/balance.json') as json_file:
-    balance = json.load(json_file)
-with open('GDAX/prices.json') as json_file:
-    price = json.load(json_file)
 
 if initialcheck != 'done':
     initial = {}
     balances()
+    with open('GDAX/balance.json') as json_file:
+        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
@@ -441,6 +439,11 @@ if algorithm == 'THRESHOLD':
         balances()
 
         prices()
+
+        with open('GDAX/balance.json') as json_file:
+            balance = json.load(json_file)
+        with open('GDAX/prices.json') as json_file:
+            price = json.load(json_file)
 
         usd_value()
 
@@ -716,6 +719,11 @@ if algorithm == 'PERIODIC':
 
             prices()
 
+            with open('GDAX/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('GDAX/prices.json') as json_file:
+                price = json.load(json_file)
+
             usd_value()
 
             deviation()
@@ -956,6 +964,11 @@ if algorithm == 'PERIODIC':
 
             prices()
 
+            with open('GDAX/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('GDAX/prices.json') as json_file:
+                price = json.load(json_file)
+
             usd_value()
 
             deviation()
@@ -1195,6 +1208,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('GDAX/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('GDAX/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 

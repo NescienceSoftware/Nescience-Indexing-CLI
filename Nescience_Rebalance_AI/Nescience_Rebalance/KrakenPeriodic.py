@@ -68,7 +68,7 @@ def setup():
                              'algorithm': algorithm}
             with open('kraken/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        else:
+        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
             print('Please check the spelling of' + " " + algorithm)
             exit(0)
 
@@ -186,7 +186,7 @@ def setup():
                                  'algorithm': algorithm}
                 with open('kraken/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
+            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
                 print('Please check the spelling of' + " " + algorithm)
                 exit(0)
 
@@ -231,9 +231,6 @@ def setup():
                                  'algorithm': algorithm}
                 with open('kraken/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
-                print('Please check the spelling of' + " " + algorithm)
-                exit(0)
 
 
 def balances():
@@ -417,14 +414,12 @@ allocation = (.99 / assetnum)
 with open('kraken/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
-with open('kraken/balance.json') as json_file:
-    balance = json.load(json_file)
-with open('kraken/prices.json') as json_file:
-    price = json.load(json_file)
 
 if initialcheck != 'done':
     initial = {}
     balances()
+    with open('kraken/balance.json') as json_file:
+        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
@@ -455,6 +450,11 @@ if algorithm == 'THRESHOLD':
         balances()
 
         prices()
+
+        with open('kraken/balance.json') as json_file:
+            balance = json.load(json_file)
+        with open('kraken/prices.json') as json_file:
+            price = json.load(json_file)
 
         usd_value()
 
@@ -776,6 +776,11 @@ if algorithm == 'PERIODIC':
 
             prices()
 
+            with open('kraken/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('kraken/prices.json') as json_file:
+                price = json.load(json_file)
+
             usd_value()
 
             deviation()
@@ -1052,6 +1057,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('kraken/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('kraken/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 
@@ -1331,6 +1341,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('kraken/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('kraken/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 
