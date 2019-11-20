@@ -68,7 +68,7 @@ def setup():
                              'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
             with open('kucoin/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        else:
+        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
             print('Please check the spelling of' + " " + algorithm)
             exit(0)
 
@@ -106,15 +106,23 @@ def setup():
 
             def oldcash():
                 cash = {}
-                for b in new_balances:
-                    if b['currency'] == stablecoin and b['type'] == 'trade':
-                        cash['old_cash'] = [b['balance']][0]
-                        old_cash = float(cash['old_cash'])
-                        return old_cash
-                    if stablecoin not in cash:
-                        old_cash = 0
-                        return old_cash
+
+                def cashcheck():
+                    for b in new_balances:
+                        if b['currency'] == 'USDT' and b['type'] == 'trade':
+                            cash['old_cash'] = [b['balance']][0]
+                            old_cash = float(cash['old_cash'])
+                            return old_cash
+
+                cashcheck = cashcheck()
+
+                if cashcheck is None:
+                    old_cash = 0
+                    return old_cash
+                else:
+                    return cashcheck
             old_cash = oldcash()
+
             # Get Balances of each previously entered asset
             new_balance = {}
             for x in range(0, assetnum):
@@ -162,7 +170,7 @@ def setup():
                                  'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
                 with open('kucoin/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
+            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
                 print('Please check the spelling of' + " " + algorithm)
                 exit(0)
 
@@ -229,13 +237,24 @@ def balances():
             time.sleep(2)
             pass
     # Balance USD
-    cash = {}
-    for b in balances:
-        if b['currency'] == stablecoin and b['type'] == 'trade':
-            cash['cash_balance'] = [b['balance']][0]
-            cash_balance = float(cash['cash_balance'])
-        if stablecoin not in cash:
-            cash_balance = 0
+    def cash():
+        cash = {}
+
+        def cashcheck():
+            for b in balances:
+                if b['currency'] == 'USDT' and b['type'] == 'trade':
+                    cash['old_cash'] = [b['balance']][0]
+                    old_cash = float(cash['old_cash'])
+                    return old_cash
+
+        cashcheck = cashcheck()
+
+        if cashcheck is None:
+            old_cash = 0
+            return old_cash
+        else:
+            return cashcheck
+    cash_balance = cash()
     # Get Balances of each previously entered asset
     balance = {}
     for x in range(0, assetnum):
@@ -428,13 +447,12 @@ allocation = (.99 / assetnum)
 with open('Kucoin/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
-with open('Kucoin/balance.json') as json_file:
-    balance = json.load(json_file)
-with open('Kucoin/prices.json') as json_file:
-    price = json.load(json_file)
 
 if initialcheck != 'done':
     initial = {}
+    balances()
+    with open('Kucoin/balance.json') as json_file:
+        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance['balance']["balance_asset{0}".format(x)])
@@ -466,6 +484,11 @@ if algorithm == 'THRESHOLD':
         balances()
 
         prices()
+
+        with open('Kucoin/balance.json') as json_file:
+            balance = json.load(json_file)
+        with open('Kucoin/prices.json') as json_file:
+            price = json.load(json_file)
 
         usd_value()
 
@@ -767,6 +790,11 @@ if algorithm == 'PERIODIC':
 
             prices()
 
+            with open('Kucoin/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('Kucoin/prices.json') as json_file:
+                price = json.load(json_file)
+
             usd_value()
 
             deviation()
@@ -1038,6 +1066,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('Kucoin/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('Kucoin/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 
@@ -1312,6 +1345,11 @@ if algorithm == 'PERIODIC':
             balances()
 
             prices()
+
+            with open('Kucoin/balance.json') as json_file:
+                balance = json.load(json_file)
+            with open('Kucoin/prices.json') as json_file:
+                price = json.load(json_file)
 
             usd_value()
 
