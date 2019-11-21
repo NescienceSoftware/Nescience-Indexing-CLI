@@ -11,7 +11,8 @@
 ### Table of Contents
 
 - [Description](#description)
-- [How To Use](#how-to-use)
+- [Setup](#how-to-use)
+- [Further Operation](#further-operation)
 - [Build Instructions](#build)
 - [Company Information](#nescience-software--capital-llc)
 
