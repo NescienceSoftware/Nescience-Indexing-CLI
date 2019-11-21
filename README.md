@@ -101,6 +101,8 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
+
 [Back To The Top](#table-of-contents)
 
 ---
@@ -149,6 +151,8 @@ This process is different on each exchange, with each exchange having unique res
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
+
 [Back To The Top](#table-of-contents)
 
 ---
@@ -186,6 +190,8 @@ This process is different on each exchange, with each exchange having unique res
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
@@ -229,6 +235,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
@@ -275,6 +283,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
@@ -326,6 +336,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
+
 [Back To The Top](#table-of-contents)
 
 ---
@@ -371,6 +383,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
@@ -418,6 +432,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
+
 [Back To The Top](#table-of-contents)
 
 ---
@@ -463,6 +479,8 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
@@ -519,6 +537,8 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
+
 [Back To The Top](#table-of-contents)
 
 ---
@@ -558,6 +578,8 @@ Remember to save your API Key and API Secret somewhere safe!
 7. Select either Periodic Rebalancing or Threshold Rebalancing.
 
 8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
 
