@@ -40,7 +40,7 @@ def setup():
         stablecoin = stablecoin.upper()
         for x in range(0, assetnum):
             x = str(x + 1)
-            assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
             assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
         symbol = {}
@@ -58,14 +58,14 @@ def setup():
             threshold = (.01 * threshold)
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
-                             'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                             'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
             with open('kucoin/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
         if algorithm == 'PERIODIC':
             period = input('Hourly, Daily, or Weekly: ').upper()
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
-                             'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                             'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
             with open('kucoin/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
         if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
@@ -86,7 +86,7 @@ def setup():
 
             for x in range(0, assetnum):
                 x = str(x + 1)
-                assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
                 assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
             symbol = {}
@@ -159,7 +159,7 @@ def setup():
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
-                                 'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                                 'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
                 with open('kucoin/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
@@ -167,7 +167,7 @@ def setup():
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
-                                 'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                                 'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
                 with open('kucoin/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
             if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
@@ -204,7 +204,7 @@ def setup():
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
-                                 'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                                 'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
                 with open('kucoin/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
@@ -212,7 +212,7 @@ def setup():
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
-                                 'algorithm': algorithm, 'API PASSPHRASE': API_PASSPHRASE}
+                                 'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
                 with open('kucoin/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
 

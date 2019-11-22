@@ -274,8 +274,7 @@ if initialcheck != 'done':
     initialcheck = 'done'
     count = 0
     data = {'initial': initial,
-            'initialcheck': initialcheck,
-            'initialcheck2': ""}
+            'initialcheck': initialcheck}
     data2 = {'count': count}
 
     with open('alpaca/count.json', 'w') as outfile:
@@ -377,6 +376,9 @@ while count < 99999:
             initialcheck2 = performance['initialcheck2']
 
         if initialcheck2 != 'done':
+            global old
+            global compare
+            global profit
 
             compare = {}
             old = {}

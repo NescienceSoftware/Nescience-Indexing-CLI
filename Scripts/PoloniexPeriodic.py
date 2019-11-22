@@ -39,7 +39,7 @@ def setup():
         stablecoin = stablecoin.upper()
         for x in range(0, assetnum):
             x = str(x + 1)
-            assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
             assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
         symbol = {}
@@ -86,7 +86,7 @@ def setup():
             stablecoin = stablecoin.upper()
             for x in range(0, assetnum):
                 x = str(x + 1)
-                assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
+                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
                 assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
             symbol = {}
