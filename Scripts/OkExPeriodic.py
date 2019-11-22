@@ -68,9 +68,10 @@ def setup():
                              'algorithm': algorithm}
             with open('okex/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-            print('Please check the spelling of' + " " + algorithm)
-            exit(0)
+        if str(algorithm) != 'THRESHOLD' and str(algorithm) != 'PERIODIC':
+            print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+            time.sleep(60)
+
 
     else:
         reconfig = input('Would you like to reconfigure?  ')
@@ -186,9 +187,10 @@ def setup():
                                  'algorithm': algorithm}
                 with open('okex/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-                print('Please check the spelling of' + " " + algorithm)
-                exit(0)
+            if str(algorithm) != 'THRESHOLD' and str(algorithm) != 'PERIODIC':
+                print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+                time.sleep(60)
+
 
         else:
             assetnum = config['assetnum']

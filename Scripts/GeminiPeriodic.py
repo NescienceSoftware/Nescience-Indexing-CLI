@@ -69,8 +69,8 @@ def setup():
             with open('gemini/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
         if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-            print('Please check the spelling of' + " " + algorithm)
-            exit(0)
+            print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+            time.sleep(60)
 
     else:
         reconfig = input('Would you like to reconfigure?  ')
@@ -153,8 +153,8 @@ def setup():
                 with open('gemini/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
             if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-                print('Please check the spelling of' + " " + algorithm)
-                exit(0)
+                print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+                time.sleep(60)
 
         else:
             assetnum = config['assetnum']

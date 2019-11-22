@@ -24,7 +24,7 @@ def setup():
     global stablecoin
     global symbol
 
-    with open('bitfinex3/config.json') as json_file:
+    with open('bitfinex/config.json') as json_file:
         config = json.load(json_file)
         configcheck = config['configcheck']
 
@@ -69,8 +69,8 @@ def setup():
             with open('bitfinex/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
         if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-            print('Please check the spelling of' + " " + algorithm)
-            exit(0)
+            print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+            time.sleep(60)
 
     else:
         reconfig = input('Would you like to reconfigure?  ')
@@ -160,7 +160,7 @@ def setup():
 
             olddata = {'old': old, 'old_cash': old_cash}
 
-            with open('bitfinex3/old.json', 'w') as outfile:
+            with open('bitfinex/old.json', 'w') as outfile:
                 json.dump(olddata, outfile)
 
             configcheck = 'configured'
@@ -228,9 +228,9 @@ def setup():
                                  'algorithm': algorithm}
                 with open('bitfinex/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            else:
-                print('Please check the spelling of' + " " + algorithm)
-                exit(0)
+            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
+                print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
+                time.sleep()
 
 
 def balances():
@@ -282,7 +282,7 @@ def balances():
         time.sleep(1)
     # save balances to json
     balance.update({'cash_balance': cash_balance})
-    with open('bitfinex3/balance.json', 'w') as outfile:
+    with open('bitfinex/balance.json', 'w') as outfile:
         json.dump(balance, outfile)
 
 

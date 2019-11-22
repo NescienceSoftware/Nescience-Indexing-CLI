@@ -1,0 +1,1 @@
+{"assets": {"asset1": "D", "asset2": "E", "asset3": "F", "asset4": "G", "asset5": "H"}, "threshold": 0.15, "configcheck": "configured", "assetnum": 5, "stablecoin": "C", "symbol": {"symbol_asset1": "DC", "symbol_asset2": "EC", "symbol_asset3": "FC", "symbol_asset4": "GC", "symbol_asset5": "HC"}, "API_KEY": "a", "API_SECRET": "b", "algorithm": "THRESHOLD"}
