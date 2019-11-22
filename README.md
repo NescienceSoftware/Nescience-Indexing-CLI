@@ -16,16 +16,20 @@
 - [Build Instructions](#build)
 - [Company Information](#nescience-software--capital-llc)
 
+
 ---
 
 ## Description
 
 With our open-source portfolio management tool, an investor with no previous experience can apply a variety of automated portfolio rebalancing strategies to their portfolio. Further, due to our entirely client side application, we are able to ensure transaction security and offer the most secure portfolio management tool available at no upfront cost to our users. 
 
+A demo of our tool can be found operating 24/7 on our twitch channel: [NescienceSoftware](https://www.twitch.tv/nesciencesoftware)
+
 #### Media
 
 - [Mission Statement](https://nescience.io/wp-content/uploads/2019/11/Nescience_Cover.pdf)
 - [Rebalancing Whitepaper](https://nescience.io/wp-content/uploads/2019/11/Nescience_Rebalance_Whitepaper.pdf)
+- [Demo](https://www.twitch.tv/nesciencesoftware)
 
 
 ---
@@ -686,6 +690,7 @@ Nescience Software & Capital is a portfolio management firm focused on advanced 
 
 
 - Website - [Nescience Software & Capital, LLC](https://nescience.io)
+- Twitch - [NescienceSoftware](https://www.twitch.tv/nesciencesoftware)
 - Twitter - [@NescienceSC](https://twitter.com/jamesqquick)
 - Facebook - [@NescienceSoftware](https://www.facebook.com/NescienceSoftware)
 - Reddit - [Nescience](https://www.reddit.com/r/Nescience)
