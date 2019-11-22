@@ -107,7 +107,6 @@ def setup():
 def balances():
     # Pull  balance for each selected asset
     global cash_balance
-    global balance
 
     # Balance USD
     cash_balance = alpaca.get_account().cash
@@ -250,8 +249,6 @@ with open('alpaca/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
 
-with open('alpaca/prices.json') as json_file:
-    price = json.load(json_file)
 
 setup()
 
@@ -263,11 +260,11 @@ alpaca = tradeapi.REST(API_KEY, API_SECRET, SITE, 'v2')
 
 allocation = (.985 / assetnum)
 
-balances()
-
 if initialcheck != 'done':
     initial = {}
     balances()
+    with open('alpaca/balance.json') as json_file:
+        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
@@ -293,7 +290,10 @@ while count < 99999:
     balances()
 
     prices()
-
+    with open('alpaca/prices.json') as json_file:
+        price = json.load(json_file)
+    with open('alpaca/balance.json') as json_file:
+        balance = json.load(json_file)
     usd_value()
 
     deviation()
