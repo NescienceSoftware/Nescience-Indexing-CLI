@@ -612,7 +612,7 @@ Any issues or inquiries can be directed to support@nescience.io
 ----------------------------
 ## Build
 
-To ensure that the most recent release is genuine, check that the PGP-signature is that of Nescience Software & Capital.
+To ensure that the most recent release is genuine, check that the PGP-signature in "Signature.txt.gpg" is that of Nescience Software & Capital. Our fingerprint will always be available on our website's home page.
 
 Further, the best way to validate a new release is to build/compile the application yourself based on the Python scripts provided in the "Scripts" folder, while inspecting any new changes. This requires Python 3.5+ and a number of dependencies, and can be done following the steps below:
 
