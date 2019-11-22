@@ -32,6 +32,8 @@ With our open-source portfolio management tool, an investor with no previous exp
 
 ## How To Use
 
+Compatable with Windows 64-bit
+
 #### Installation
 
 Installation in the form of an executable is relatively straightforward. Download the most recent release, unzip the file, and run "Nescience_Rebalance.exe".
