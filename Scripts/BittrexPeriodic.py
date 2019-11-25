@@ -28,8 +28,6 @@ def setup():
 
     if configcheck != 'configured':
         assets = {}
-        API_KEY = input('API KEY:')
-        API_SECRET = input('API SECRET:')
         assetnum = input('Number of Assets in the Portfolio:')
         assetnum = int(assetnum)
         stablecoin = input('What currency would you like to trade against? :')
@@ -52,6 +50,8 @@ def setup():
             threshold = input("Algorithm Threshold= ")
             threshold = float(threshold)
             threshold = (.01 * threshold)
+            API_KEY = input('API KEY:')
+            API_SECRET = input('API SECRET:')
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
@@ -59,6 +59,8 @@ def setup():
                 json.dump(configuration, outfile)
         if algorithm == 'PERIODIC':
             period = input('Hourly, Daily, or Weekly: ').upper()
+            API_KEY = input('API KEY:')
+            API_SECRET = input('API SECRET:')
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}

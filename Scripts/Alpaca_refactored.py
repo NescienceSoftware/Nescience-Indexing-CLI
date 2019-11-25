@@ -22,6 +22,15 @@ def setup():
 
     if configcheck != 'configured':
         assets = {}
+
+        assetnum = input('Number of Assets in the Portfolio:')
+        assetnum = int(assetnum)
+        for x in range(0, assetnum):
+            x = str(x + 1)
+            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
+        threshold = input("Algorithm Threshold= ")
+        threshold = float(threshold)
+        threshold = (.01 * threshold)
         API_KEY = input('API KEY:')
         API_SECRET = input('API SECRET:')
         SITE = input('Live or Paper trading:')
@@ -37,15 +46,6 @@ def setup():
             else:
                 print('Please check your spelling and re-enter, Live or Paper:')
                 pass
-
-        assetnum = input('Number of Assets in the Portfolio:')
-        assetnum = int(assetnum)
-        for x in range(0, assetnum):
-            x = str(x + 1)
-            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
-        threshold = input("Algorithm Threshold= ")
-        threshold = float(threshold)
-        threshold = (.01 * threshold)
         configcheck = 'configured'
         configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                          'API_KEY': API_KEY, 'API_SECRET': API_SECRET, 'SITE': SITE}
@@ -56,6 +56,15 @@ def setup():
         reconfig = input('Would you like to reconfigure?  ')
         if reconfig == 'yes':
             assets = {}
+
+            assetnum = input('Number of Assets in the Portfolio:')
+            assetnum = int(assetnum)
+            for x in range(0, assetnum):
+                x = str(x + 1)
+                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
+            threshold = input("Algorithm Threshold= ")
+            threshold = float(threshold)
+            threshold = (.01 * threshold)
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
             SITE = input('Live or Paper trading:')
@@ -69,17 +78,8 @@ def setup():
                     SITE = 'https://api.alpaca.markets'
                     ss = True
                 else:
-                    print('Please check your spelling and re-enter, Live or Trading:')
+                    print('Please check your spelling and re-enter, Live or Paper:')
                     pass
-
-            assetnum = input('Number of Assets in the Portfolio:')
-            assetnum = int(assetnum)
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
-            threshold = input("Algorithm Threshold= ")
-            threshold = float(threshold)
-            threshold = (.01 * threshold)
             configcheck = 'configured'
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'API_KEY': API_KEY, 'API_SECRET': API_SECRET, 'SITE': SITE}
