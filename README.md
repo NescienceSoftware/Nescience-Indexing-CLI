@@ -638,7 +638,7 @@ Further, the best way to validate a new release is to build/compile the applicat
   4. For each exchange you would like to use, in your "Scripts" folder generate an additional folder with the name of the exchange.
      (Coinbase= "GDAX", Binance = "Binance", Kucoin= "Kucoin", Kraken= "Kraken", etc.)
      
-  5. In each folder, create 2 JSON files with the following titles and the following content:
+  5. In each folder, create 3 JSON files with the following titles and the following content:
   
 ----------------------  
   
@@ -652,7 +652,14 @@ Further, the best way to validate a new release is to build/compile the applicat
 
     Content:
     ```
-    {"initialcheck": "", "initialcheck2": ""}
+    {"initialcheck": ""}
+    ```
+    
+3. Title: "Performance"
+    
+    Content:
+    ```
+    {"initialcheck2": ""}
     ```
 
 ----------------------  
