@@ -1,0 +1,20 @@
+Nescience Software & Capital, LLC Rebalancing AI/Tool Liscence
+===================================================================================================================================================================
+
+Copyright (c) 2018-2019 Nescience Software & Capital, LLC.
+
+1. Subject to the terms of this Agreement, you are granted a worldwide license to use this software.
+
+2. You may copy and distribute unmodified copies of this software.
+
+3. You shall not modify, make derivative works based upon, recreate, generate, disassemble, decompile, reverse engineer, reverse assemble, 
+reverse compile or otherwise attempt to derive the human-readable form of the source code of any parts of this software.
+
+4. You may not cancel, reduce, change, remove, block, or redirect built-in developer donation in any way.
+
+5. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+================================================================================================================================================================
+

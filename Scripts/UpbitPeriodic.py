@@ -670,15 +670,15 @@ if algorithm == 'THRESHOLD':
                         json.dump(data, outfile)
 
                 # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                if performance['profit']['overall'] > 200:
+                if performance['profit']['overall'] > 400:
                     # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                    hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                    highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                     for a in assets:
-                        if str('dev_' + a) == str(hmm):
+                        if str('dev_' + a) == str(highest):
                             print('Initiating Donation.')
-                            donation_amount = (performance['profit']['overall'] * .10)
+                            donation_amount = (performance['profit']['overall'] * .075)
 
                             # Sell Highest Deviation
                             theasset = config['assets'][str(a)]
@@ -950,15 +950,15 @@ if algorithm == 'PERIODIC':
                             json.dump(data, outfile)
 
                     # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 200:
+                    if performance['profit']['overall'] > 400:
                         # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                         for a in assets:
-                            if str('dev_' + a) == str(hmm):
+                            if str('dev_' + a) == str(highest):
                                 print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .10)
+                                donation_amount = (performance['profit']['overall'] * .075)
 
                                 # Sell Highest Deviation
                                 theasset = config['assets'][str(a)]
@@ -1231,15 +1231,15 @@ if algorithm == 'PERIODIC':
                             json.dump(data, outfile)
 
                     # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 200:
+                    if performance['profit']['overall'] > 400:
                         # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                         for a in assets:
-                            if str('dev_' + a) == str(hmm):
+                            if str('dev_' + a) == str(highest):
                                 print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .10)
+                                donation_amount = (performance['profit']['overall'] * .075)
 
                                 # Sell Highest Deviation
                                 theasset = config['assets'][str(a)]
@@ -1513,15 +1513,15 @@ if algorithm == 'PERIODIC':
                             json.dump(data, outfile)
 
                     # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 200:
+                    if performance['profit']['overall'] > 400:
                         # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                         for a in assets:
-                            if str('dev_' + a) == str(hmm):
+                            if str('dev_' + a) == str(highest):
                                 print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .10)
+                                donation_amount = (performance['profit']['overall'] * .075)
 
                                 # Sell Highest Deviation
                                 theasset = config['assets'][str(a)]
