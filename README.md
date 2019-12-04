@@ -89,23 +89,24 @@ This process is different on each exchange, with each exchange having unique res
 9. Save your Key/Secret somewhere safe.
 
 ###### Initial Setup
+
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
 *Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Binance" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -145,17 +146,17 @@ This process is different on each exchange, with each exchange having unique res
 
 2. When prompted, type "Bitfinex" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -179,23 +180,24 @@ This process is different on each exchange, with each exchange having unique res
 6. Save your key/secret somewhere safe.
 
 ###### Initial Setup
+
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
 *Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Bittrex" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -224,23 +226,24 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 9. You API secret will then pop up with your API key on the main API page, save your secret/key/password somewhere safe.
 
 ###### Initial Setup
+
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
 *Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "GDAX, Coinbase, Coinbase.pro, etc." as your exchange selection. (Any previous naming scheme works)
 
-3. Enter your API Key, API Secret, and API password when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -272,31 +275,32 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 *This will facilitate donation of a small portion of the profits generated by this algorithm. Without doing so, the application will cease to function after a certain amount of time.*
 
 ###### Initial Setup
+
 1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
 
 *Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
 2. When prompted, type "Gemini" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
-
-[Back To The Top](#table-of-contents)
 
 ---
 
 #### Huobi
+
+###### API Instructions
 
 1. In the upper right corner, while hovering over your profile and click "API Management".
 
@@ -330,17 +334,17 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 2. When prompted, type "Huobi" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -378,17 +382,17 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 2. When prompted, type "Kraken" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -426,17 +430,17 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 2. When prompted, type "Kucoin" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -474,17 +478,17 @@ This configuration works with coinbase.pro (GDAX) and coinbase.prime.
 
 2. When prompted, type "Liquid" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -531,17 +535,17 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 2. When prompted, type "Poloniex" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-5. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-6. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
@@ -575,15 +579,17 @@ Remember to save your API Key and API Secret somewhere safe!
 
 2. When prompted, type "Alpaca" as your exchange selection.
 
-3. Enter your API Key and API Secret when prompted.
+3. Determine and enter the number of assets in your rebalancing portfolio.
 
-4. Determine and enter the number of assets in your rebalancing portfolio.
+4. Determine what currency you wish to trade against (e.g. BTC: (X/BTC) , USDT: (X/USDT) , ETH: (X/ETH) )
 
-6. Input your asset selections based on Symbol (e.g. Target: TGT, AMD: AMD, NVIDIA: NVDA)
+5. Input your asset selections based on Symbol (e.g. Bitcoin: BTC, Tether: USDT, OmiseGo: OMG)
 
-7. Select either Periodic Rebalancing or Threshold Rebalancing.
+6. Select either Periodic Rebalancing or Threshold Rebalancing.
 
-8. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+7. Depending on your selection, determine your Threshold (e.g. 15% = 15) or your period (e.g. Daily = daily).
+
+8. Enter your API Key and API Secret when prompted.
 
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
