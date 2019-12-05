@@ -546,7 +546,7 @@ if algorithm == 'THRESHOLD':
         deviation()
 
         # Record data every half day
-        multiples = [n for n in range(1, 99999) if n % 1000 == 0]
+        multiples = [n for n in range(1, 99999) if n % (200*assetnum) == 0]
         if count in multiples:
             # Checks for previous runs and calculates gain over initial allocation
             with open('kraken/performance.json') as json_file:
