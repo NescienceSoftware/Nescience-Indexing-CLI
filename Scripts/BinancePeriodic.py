@@ -59,6 +59,9 @@ def setup():
             threshold = (.01 * threshold)
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
@@ -68,6 +71,9 @@ def setup():
             period = input('Hourly, Daily, or Weekly: ').upper()
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
@@ -96,6 +102,8 @@ def setup():
             for x in range(0, assetnum):
                 x = str(x + 1)
                 symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + stablecoin)
+
+            print("Loading... This may take a few seconds.")
 
             client = Client(API_KEY, API_SECRET)
 
@@ -132,6 +140,9 @@ def setup():
                 threshold = input("Algorithm Threshold= ")
                 threshold = float(threshold)
                 threshold = (.01 * threshold)
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -145,6 +156,9 @@ def setup():
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
                                  'algorithm': algorithm}
+
+                print("Initializing...")
+
                 with open('binance/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
 

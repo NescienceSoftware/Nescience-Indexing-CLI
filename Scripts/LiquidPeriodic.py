@@ -54,6 +54,9 @@ def setup():
             threshold = (.01 * threshold)
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
@@ -63,6 +66,9 @@ def setup():
             period = input('Hourly, Daily, or Weekly: ').upper()
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
@@ -91,6 +97,8 @@ def setup():
             for x in range(0, assetnum):
                 x = str(x + 1)
                 symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + '/' + stablecoin)
+
+            print("Loading... This may take a few seconds.")
 
             client = ccxt.liquid({'apiKey': API_KEY, 'secret': API_SECRET})
 
@@ -169,6 +177,9 @@ def setup():
                 threshold = input("Algorithm Threshold= ")
                 threshold = float(threshold)
                 threshold = (.01 * threshold)
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -178,6 +189,9 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = input('Hourly, Daily, or Weekly: ').upper()
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
@@ -214,6 +228,9 @@ def setup():
 
             if algorithm == 'THRESHOLD':
                 threshold = config['threshold']
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -223,6 +240,9 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = config['period']
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
@@ -368,6 +388,22 @@ def sell_order(pair, sell_asset, current_price, asset):
 
     minimum = minimums()
 
+    value = sell_asset * current_price
+    fee = value * .00055
+
+    try:
+        QASHprice = float(client.fetch_ticker(str('QASH' + "/" + stablecoin))['last'])
+        time.sleep(1)
+        Qashbuy = float(fee / QASHprice)
+
+        if Qashbuy >= 1:
+            print("Buying" + " " + str(Qashbuy) + " " + "of" + " " + 'QASH for fees')
+            client.create_order(symbol=str('QASH' + "/" + stablecoin), type='market', side='buy', amount=Qashbuy,
+                                price=QASHprice)
+            time.sleep(1.25)
+    except:
+        print("Failed to buy QASH for discounted fee""'""s")
+        pass
     if sell_asset >= minimum:
         print("Selling" + " " + str(sell_asset) + " " + "of" + " " + pair)
         client.create_order(symbol=pair, type='market', side='sell', amount=sell_asset, price=current_price)
@@ -387,8 +423,24 @@ def buy_order(pair, buy_asset, current_price, asset):
             if m['symbol'] == str(pairing):
                 return float(m['limits']['amount']['min'])
 
+    value = buy_asset * current_price
     minimum = minimums()
 
+    fee = value * .00055
+
+    try:
+        QASHprice = float(client.fetch_ticker(str('QASH' + "/" + stablecoin))['last'])
+        time.sleep(1)
+        Qashbuy = float(fee / QASHprice)
+
+        if Qashbuy >= 1:
+            print("Buying" + " " + str(Qashbuy) + " " + "of" + " " + 'QASH for fees')
+            client.create_order(symbol=str('QASH' + "/" + stablecoin), type='market', side='buy', amount=Qashbuy,
+                                price=QASHprice)
+            time.sleep(1.25)
+    except:
+        print("Failed to buy QASH for discounted fee""'""s")
+        pass
     if buy_asset >= minimum:
         print("Buying" + " " + str(buy_asset) + " " + "of" + " " + pair)
         client.create_order(symbol=pair, type='market', side='buy', amount=buy_asset, price=current_price)

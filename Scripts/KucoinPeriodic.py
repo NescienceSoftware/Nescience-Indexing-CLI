@@ -57,6 +57,9 @@ def setup():
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
             API_PASSPHRASE = input('API PASSPHRASE:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
@@ -67,6 +70,9 @@ def setup():
             API_KEY = input('API KEY:')
             API_SECRET = input('API SECRET:')
             API_PASSPHRASE = input('API PASSPHRASE:')
+
+            print("Initializing...")
+
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                              'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
                              'algorithm': algorithm, 'API_PASSPHRASE': API_PASSPHRASE}
@@ -97,6 +103,8 @@ def setup():
             for x in range(0, assetnum):
                 x = str(x + 1)
                 symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + '-' + stablecoin)
+
+            print("Loading... This may take a few seconds.")
 
             client = Client(API_KEY, API_SECRET, API_PASSPHRASE)
 
@@ -159,6 +167,9 @@ def setup():
                 threshold = input("Algorithm Threshold= ")
                 threshold = float(threshold)
                 threshold = (.01 * threshold)
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -168,6 +179,9 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = input('Hourly, Daily, or Weekly: ').upper()
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
@@ -204,6 +218,9 @@ def setup():
 
             if algorithm == 'THRESHOLD':
                 threshold = config['threshold']
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -213,6 +230,9 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = config['period']
+
+                print("Initializing...")
+
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
