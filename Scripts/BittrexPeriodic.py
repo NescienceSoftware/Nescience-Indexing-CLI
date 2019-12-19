@@ -298,7 +298,7 @@ def sell_order(asset, sell_asset, current_price):
 
         def minimums():
             for c in currencies:
-                if c['MarketName'] == 'BTC-ETH':
+                if c['MarketName'] == asset:
                     return float(c['MinTradeSize'])
 
         minimum = minimums()
@@ -332,7 +332,7 @@ def buy_order(asset, buy_asset, current_price):
 
         def minimums():
             for c in currencies:
-                if c['MarketName'] == 'BTC-ETH':
+                if c['MarketName'] == asset:
                     return float(c['MinTradeSize'])
 
         minimum = minimums()
@@ -351,7 +351,7 @@ def buy_order(asset, buy_asset, current_price):
                         if minimum == 1:
                             buy_asset = round(buy_asset)
         print("Buying" + " " + str(buy_asset) + " " + "of" + " " + str(asset))
-        current_price = float(current_price * 1.02)
+        current_price = float(current_price * 1.03)
         buy_asset = float(buy_asset * .989)
         market.buy_limit(asset, quantity=buy_asset, rate=current_price)
         time.sleep(1)

@@ -1,1 +1,1 @@
-{"assets": {"asset1": "234", "asset2": "23", "asset3": "34", "asset4": "22", "asset5": "3"}, "threshold": 0.15, "configcheck": "configured", "assetnum": 5, "stablecoin": "3423", "symbol": {"symbol_asset1": "234-3423", "symbol_asset2": "23-3423", "symbol_asset3": "34-3423", "symbol_asset4": "22-3423", "symbol_asset5": "3-3423"}, "API_KEY": "dfsdf", "API_SECRET": "dfs", "algorithm": "THRESHOLD", "API_PASSPHRASE": "s"}
+{"configcheck": ""}
