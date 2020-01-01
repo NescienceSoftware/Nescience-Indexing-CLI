@@ -68,7 +68,7 @@ This process is different on each exchange, with each exchange having unique res
 
 #### Operation
 
-1. Start up "Nescience_Rebalance.exe" using the shortcut in the first folder, or directly with the executable.
+1. Start up "Nescience_Rebalance.exe" in the folder "Nescience_Rebalance
 
 *Note: If a message questions the origin of the exe, do not worry, we will be getting a proper microsoft liscence ASAP.*
 
