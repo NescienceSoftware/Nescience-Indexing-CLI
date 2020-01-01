@@ -89,6 +89,7 @@ This process is different on each exchange, with each exchange having unique res
 9. Done! After you enter your threshold/period the algorithm will query your balances and begin allocation maitenence!
 
 [Back To The Top](#table-of-contents)
+
 ---
 
 #### Binance
