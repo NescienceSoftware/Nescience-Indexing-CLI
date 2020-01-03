@@ -34,7 +34,7 @@ A demo of our tool can be found operating 24/7 on our twitch channel: [Nescience
 
 ---
 
-## How To Use
+## Setup
 
 Compatable with Windows 64-bit
 
@@ -44,7 +44,7 @@ Installation in the form of an executable is relatively straightforward. Downloa
 
 Alternatively, if one feels the need to verify the integrity of a release, follow the [build](#build) guide provided below.
 
-#### Setup
+#### API Configuration
 
 To properly set up the AI the first step is to create an API key and enable proper key authorizations. 
 
