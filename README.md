@@ -1,4 +1,4 @@
-![Project Image](https://i1.wp.com/nescience.io/wp-content/uploads/2019/03/cropped-FINAL-1-1.png?fit=588%2C216&ssl=1)
+![Project Image](https://nescience.io/wp-content/uploads/2020/01/Official.png)
 
 > Software Solutions for Alpha Seeking Portfolio Management
 
