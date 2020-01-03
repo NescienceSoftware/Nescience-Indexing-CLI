@@ -92,6 +92,11 @@ This process is different on each exchange, with each exchange having unique res
 
 ---
 
+
+---
+
+
+---
 #### Binance
 
 ###### API Instructions
