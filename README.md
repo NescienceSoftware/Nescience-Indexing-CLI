@@ -46,7 +46,6 @@ Alternatively, if one feels the need to verify the integrity of a release, follo
 
 #### Setup
 
-#### API
 To properly set up the AI the first step is to create an API key and enable proper key authorizations. 
 
 This process is different on each exchange, with each exchange having unique restrictions, for exchange-specific instructions pick an exchange from the list below:
@@ -92,11 +91,8 @@ This process is different on each exchange, with each exchange having unique res
 
 ---
 
+## API Setup
 
----
-
-
----
 #### Binance
 
 ###### API Instructions
