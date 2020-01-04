@@ -749,7 +749,7 @@ if algorithm == 'THRESHOLD':
                                     eth_symbol = str('ETH' + '-' + stablecoin)
                                     price_eth = float(client.get_ticker(symbol=eth_symbol)['price'])
                                     eth_amount = float((donation_amount / price_eth) * .98)
-                                    buy_order(eth_symbol, eth_amount, price_eth)
+                                    buy_order(eth_symbol, eth_amount, price_eth, eth_symbol)
                                     return eth_amount
                                 else:
                                     eth_amount = (donation_amount * .99)
@@ -1022,7 +1022,7 @@ if algorithm == 'PERIODIC':
                                         eth_symbol = str('ETH' + '-' + stablecoin)
                                         price_eth = float(client.get_ticker(symbol=eth_symbol)['price'])
                                         eth_amount = float((donation_amount / price_eth) * .98)
-                                        buy_order(eth_symbol, eth_amount, price_eth)
+                                        buy_order(eth_symbol, eth_amount, price_eth, eth_symbol)
                                         return eth_amount
                                     else:
                                         eth_amount = (donation_amount * .99)
@@ -1301,7 +1301,7 @@ if algorithm == 'PERIODIC':
                                         eth_symbol = str('ETH' + '-' + stablecoin)
                                         price_eth = float(client.get_ticker(symbol=eth_symbol)['price'])
                                         eth_amount = float((donation_amount / price_eth) * .98)
-                                        buy_order(eth_symbol, eth_amount, price_eth)
+                                        buy_order(eth_symbol, eth_amount, price_eth, eth_symbol)
                                         return eth_amount
                                     else:
                                         eth_amount = (donation_amount * .99)
@@ -1580,7 +1580,7 @@ if algorithm == 'PERIODIC':
                                         eth_symbol = str('ETH' + '-' + stablecoin)
                                         price_eth = float(client.get_ticker(symbol=eth_symbol)['price'])
                                         eth_amount = float((donation_amount / price_eth) * .98)
-                                        buy_order(eth_symbol, eth_amount, price_eth)
+                                        buy_order(eth_symbol, eth_amount, price_eth, eth_symbol)
                                         return eth_amount
                                     else:
                                         eth_amount = (donation_amount * .99)
