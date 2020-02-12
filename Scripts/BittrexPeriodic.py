@@ -117,8 +117,10 @@ def setup():
 
             for x in range(0, assetnum):
                 x = str(x + 1)
-                old['old_asset{0}'.format(x)] = new_balance['balance_asset{0}'.format(x)]
-
+                try:
+                    old['old_asset{0}'.format(x)] = new_balance['balance_asset{0}'.format(x)]
+                except:
+                    pass
             olddata = {'old': old, 'old_cash': old_cash}
 
             with open('bittrex/old.json', 'w') as outfile:
