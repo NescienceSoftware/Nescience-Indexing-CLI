@@ -468,18 +468,19 @@ if algorithm == 'THRESHOLD':
                     if sell["sell_asset{0}".format(y)] < 0:
                         sell["sell_asset{0}".format(y)] = (-1 * sell["sell_asset{0}".format(y)])
                         buy_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)], price["price_asset{0}".format(y)])
-        time.sleep(3)
+            balances()
+            prices()
+            usd_value()
+            deviation()
         balances()
         prices()
         usd_value()
+        deviation()
 
         # Buy order trade trigger
         negative_threshold = (-1 * config['threshold'])
         for x in range(0, assetnum):
             x = str(x + 1)
-            balances()
-            usd_value()
-            deviation()
             if dev["dev_asset{0}".format(x)] < negative_threshold:
 
                 # Calculate # of shares to buy
@@ -502,10 +503,14 @@ if algorithm == 'THRESHOLD':
                     y = str(y + 1)
                     if buy["buy_asset{0}".format(y)] > 0:
                         buy_order(symbol["symbol_asset{0}".format(y)], buy["buy_asset{0}".format(y)], price["price_asset{0}".format(y)])
-
+            balances()
+            prices()
+            usd_value()
+            deviation()
         balances()
         prices()
         usd_value()
+        deviation()
 
         # Record data every half day
         multiples = [n for n in range(1, 99999) if n % int((4300/5)*assetnum) == 0]
@@ -577,7 +582,10 @@ if algorithm == 'THRESHOLD':
                 for x in range(0, assetnum):
                     x = str(x + 1)
                     # call old asset balance from Performance and set as new old asset dict
-                    old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    try:
+                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    except:
+                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
 
                     # calculate today's value of previous balances
                     compare["compare_asset{0}".format(x)] = (

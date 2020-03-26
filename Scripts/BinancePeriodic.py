@@ -360,42 +360,46 @@ def deviation():
 def sell_order(asset, sell_asset, current_price):
 
     value = current_price * sell_asset
+
     if value >= 10:
-        try:
-            currencies = client.get_products()['data']
-        except OSError:
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except BinanceAPIException as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except BinanceWithdrawException as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except requests.exceptions.Timeout as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except requests.exceptions.ReadTimeout as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        for c in currencies:
-            if c['symbol'] == str(asset):
-                minimum = c['minTrade']
-        if minimum <= .001:
+        if sell_asset == 'BTC_USDT':
             sell_asset = truncate(sell_asset, 3)
         else:
-            if minimum <= .01:
-                sell_asset = truncate(sell_asset, 2)
+            try:
+                currencies = client.get_products()['data']
+            except OSError:
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except BinanceAPIException as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except BinanceWithdrawException as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except requests.exceptions.Timeout as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except requests.exceptions.ReadTimeout as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            for c in currencies:
+                if c['symbol'] == str(asset):
+                    minimum = c['minTrade']
+            if minimum <= .001:
+                sell_asset = truncate(sell_asset, 3)
             else:
-                if minimum <= .1:
-                    sell_asset = truncate(sell_asset, 1)
+                if minimum <= .01:
+                    sell_asset = truncate(sell_asset, 2)
                 else:
-                    if minimum <= 1:
-                        sell_asset = round(sell_asset)
+                    if minimum <= .1:
+                        sell_asset = truncate(sell_asset, 1)
+                    else:
+                        if minimum <= 1:
+                            sell_asset = round(sell_asset)
 
         print("Selling" + " " + str(sell_asset) + " " + "of" + " " + str(asset))
         client.create_order(
@@ -409,33 +413,36 @@ def buy_order(asset, buy_asset, current_price):
 
     value = current_price * buy_asset
     if value >= 10:
-        try:
-            currencies = client.get_products()['data']
-        except OSError:
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except BinanceAPIException as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        except BinanceWithdrawException as e:
-            print(e)
-            time.sleep(2)
-            currencies = client.get_products()['data']
-        for c in currencies:
-            if c['symbol'] == str(asset):
-                minimum = c['minTrade']
-        if minimum <= .001:
-            buy_asset = truncate(buy_asset, 3)
+        if sell_asset == 'BTC_USDT':
+            sell_asset = truncate(sell_asset, 3)
         else:
-            if minimum <= .01:
-                buy_asset = truncate(buy_asset, 2)
+            try:
+                currencies = client.get_products()['data']
+            except OSError:
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except BinanceAPIException as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            except BinanceWithdrawException as e:
+                print(e)
+                time.sleep(2)
+                currencies = client.get_products()['data']
+            for c in currencies:
+                if c['symbol'] == str(asset):
+                    minimum = c['minTrade']
+            if minimum <= .001:
+                buy_asset = truncate(buy_asset, 3)
             else:
-                if minimum <= .1:
-                    buy_asset = truncate(buy_asset, 1)
+                if minimum <= .01:
+                    buy_asset = truncate(buy_asset, 2)
                 else:
-                    if minimum <= 1:
-                        buy_asset = round(buy_asset)
+                    if minimum <= .1:
+                        buy_asset = truncate(buy_asset, 1)
+                    else:
+                        if minimum <= 1:
+                            buy_asset = round(buy_asset)
 
         print("Buying" + " " + str(buy_asset) + " " + "of" + " " + str(asset))
         client.create_order(
@@ -658,7 +665,10 @@ if algorithm == 'THRESHOLD':
                 for x in range(0, assetnum):
                     x = str(x + 1)
                     # call old asset balance from Performance and set as new old asset dict
-                    old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    try:
+                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    except:
+                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
 
                     # calculate today's value of previous balances
                     compare["compare_asset{0}".format(x)] = (

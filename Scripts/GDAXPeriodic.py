@@ -623,7 +623,10 @@ if algorithm == 'THRESHOLD':
                 for x in range(0, assetnum):
                     x = str(x + 1)
                     # call old asset balance from Performance and set as new old asset dict
-                    old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    try:
+                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+                    except:
+                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
 
                     # calculate today's value of previous balances
                     compare["compare_asset{0}".format(x)] = (
