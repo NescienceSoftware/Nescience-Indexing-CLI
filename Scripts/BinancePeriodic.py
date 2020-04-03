@@ -362,7 +362,7 @@ def sell_order(asset, sell_asset, current_price):
     value = current_price * sell_asset
 
     if value >= 10:
-        if sell_asset == 'BTC_USDT':
+        if asset == 'BTC_USDT':
             sell_asset = truncate(sell_asset, 3)
         else:
             try:
@@ -413,7 +413,7 @@ def buy_order(asset, buy_asset, current_price):
 
     value = current_price * buy_asset
     if value >= 10:
-        if buy_asset == 'BTC_USDT':
+        if asset == 'BTC_USDT':
             buy_asset = truncate(buy_asset, 3)
         else:
             try:
