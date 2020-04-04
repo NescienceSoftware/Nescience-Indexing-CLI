@@ -381,7 +381,7 @@ def sell_order(pair, sell_asset, current_price, asset):
     sell_asset = float(sell_asset)
     markets = client.fetch_markets()
     time.sleep(3)
-
+    current_price = (current_price * 0.5)
     pairing = str(str(asset) + "/" + str(stablecoin))
 
     def minimums():
@@ -393,7 +393,7 @@ def sell_order(pair, sell_asset, current_price, asset):
 
     if sell_asset >= minimum:
         print("Selling" + " " + str(sell_asset) + " " + "of" + " " + pair)
-        client.create_order(symbol=pair, type='market', side='sell', amount=sell_asset, price=current_price)
+        client.create_order(symbol=pair, type='limit', side='sell', amount=sell_asset, price=current_price)
         time.sleep(1.25)
 
 
@@ -402,7 +402,7 @@ def buy_order(pair, buy_asset, current_price, asset):
     buy_asset = float(buy_asset)
     markets = client.fetch_markets()
     time.sleep(3)
-
+    current_price = (current_price * 1.25)
     pairing = str(str(asset) + "/" + str(stablecoin))
 
     def minimums():
@@ -414,7 +414,7 @@ def buy_order(pair, buy_asset, current_price, asset):
 
     if buy_asset >= minimum:
         print("Buying" + " " + str(buy_asset) + " " + "of" + " " + pair)
-        client.create_order(symbol=pair, type='market', side='buy', amount=buy_asset, price=current_price)
+        client.create_order(symbol=pair, type='limit', side='buy', amount=buy_asset, price=current_price)
         time.sleep(1.25)
 
 # MAIN
