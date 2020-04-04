@@ -36,7 +36,7 @@ A demo of our tool can be found operating 24/7 on our twitch channel: [Nescience
 
 ## Setup
 
-Compatable with Windows 64-bit
+Compatable with Windows 64-bit.
 
 #### Installation
 
