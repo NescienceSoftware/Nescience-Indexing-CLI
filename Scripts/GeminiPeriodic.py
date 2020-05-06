@@ -1,11 +1,10 @@
-from time import sleep
-from sys import exit
+import gemini
 import time
 import datetime
 import math
 import json
-import ccxt
 import ctypes
+from sys import exit
 ctypes.windll.kernel32.SetConsoleTitleW("Gemini")
 
 
@@ -30,19 +29,21 @@ def setup():
 
     if configcheck != 'configured':
         assets = {}
+        API_KEY = input('API KEY:')
+        API_SECRET = input('API SECRET:')
         assetnum = input('Number of Assets in the Portfolio:')
         assetnum = int(assetnum)
         stablecoin = input('What currency would you like to trade against: ')
         stablecoin = stablecoin.upper()
         for x in range(0, assetnum):
             x = str(x + 1)
-            assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
+            assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
             assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
         symbol = {}
         for x in range(0, assetnum):
             x = str(x + 1)
-            symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + '/' + stablecoin)
+            symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + stablecoin)
 
         configcheck = 'configured'
 
@@ -52,31 +53,24 @@ def setup():
             threshold = input("Algorithm Threshold= ")
             threshold = float(threshold)
             threshold = (.01 * threshold)
-            API_KEY = input('API KEY:')
-            API_SECRET = input('API SECRET:')
-
-            print("Initializing...")
-
-            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck, 'assetnum': assetnum,
-                             'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
+            configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
+                             'assetnum': assetnum,
+                             'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
+                             'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
             with open('gemini/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
         if algorithm == 'PERIODIC':
             period = input('Hourly, Daily, or Weekly: ').upper()
-            API_KEY = input('API KEY:')
-            API_SECRET = input('API SECRET:')
-
-            print("Initializing...")
-
             configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
-                             'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY, 'API_SECRET': API_SECRET,
+                             'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
+                             'API_SECRET': API_SECRET,
                              'algorithm': algorithm}
             with open('gemini/config.json', 'w') as outfile:
                 json.dump(configuration, outfile)
-        if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-            print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
-            time.sleep(60)
+        else:
+            print('Please check the spelling of' + " " + algorithm)
+            exit(0)
 
     else:
         reconfig = input('Would you like to reconfigure?  ')
@@ -90,86 +84,49 @@ def setup():
             stablecoin = stablecoin.upper()
             for x in range(0, assetnum):
                 x = str(x + 1)
-                assets["asset{0}".format(x)] = input('Asset' + " " + x + ':')
+                assets["asset{0}".format(x)] = input('asset' + " " + x + ':')
                 assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
             symbol = {}
             for x in range(0, assetnum):
                 x = str(x + 1)
-                symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + '/' + stablecoin)
+                symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + stablecoin)
 
-            print("Loading... This may take a few seconds.")
-
-            client = ccxt.gemini({'apiKey': API_KEY, 'secret': API_SECRET})
-
+            client = gemini.PrivateClient(API_KEY, API_SECRET)
             try:
-                old_cash = client.fetch_balance()[stablecoin]['total']
+                new_balances = client.get_balance()
+            except ConnectionError as e:
+                print(e)
                 time.sleep(3)
-            except ccxt.DDoSProtection as e:
-                print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                time.sleep(2)
-                old_cash = float(client.fetch_balance()[stablecoin]['total'])
-            except ccxt.RequestTimeout as e:
-                time.sleep(.1)
-                print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                old_cash = float(client.fetch_balance()[stablecoin]['total'])
-            except ccxt.ExchangeNotAvailable as e:
-                time.sleep(.1)
-                print(type(e).__name__, e.args, 'Exchange Not Available due to downtime or maintenance (ignoring)')
-                old_cash = float(client.fetch_balance()[stablecoin]['total'])
-            except ccxt.AuthenticationError as e:
-                time.sleep(.1)
-                print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                old_cash = float(client.fetch_balance()[stablecoin]['total'])
-            except KeyError:
-                old_cash = 0.0
-                time.sleep(4)
-            time.sleep(1.25)
+                new_balances = client.get_balance()
             # Get Balances of each previously entered asset
             new_balance = {}
             for x in range(0, assetnum):
                 x = str(x + 1)
-                try:
-                    new_balance['balance_asset{0}'.format(x)] = float(
-                        client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                    time.sleep(3)
-                except ccxt.DDoSProtection as e:
-                    print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                    time.sleep(2)
-                    new_balance['balance_asset{0}'.format(x)] = float(
-                        client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                except ccxt.RequestTimeout as e:
-                    time.sleep(.1)
-                    print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                    new_balance['balance_asset{0}'.format(x)] = float(
-                        client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                except ccxt.ExchangeNotAvailable as e:
-                    time.sleep(.1)
-                    print(type(e).__name__, e.args, 'Exchange Not Available due to downtime or maintenance (ignoring)')
-                    new_balance['balance_asset{0}'.format(x)] = float(
-                        client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                except ccxt.AuthenticationError as e:
-                    time.sleep(.1)
-                    print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                    new_balance['balance_asset{0}'.format(x)] = float(
-                        client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                except KeyError:
-                    new_balance['balance_asset{0}'.format(x)] = 0.0
-                    time.sleep(4)
-                time.sleep(1.25)
+                for b in new_balances:
+                    if b['currency'] == assets["asset{0}".format(x)]:
+                        new_balance["balance_asset{0}".format(x)] = [b['amount']][0]
+                        new_balance["balance_asset{0}".format(x)] = float(new_balance["balance_asset{0}".format(x)])
+                    if "balance_asset{0}".format(x) not in new_balance:
+                        new_balance["balance_asset{0}".format(x)] = 0
+
+            def oldcash():
+                for b in new_balances:
+                    if b['currency'] == stablecoin:
+                        old_cash = b['amount']
+                        old_cash = float(old_cash)
+                        return old_cash
+            old_cash = oldcash()
 
             old = {}
 
             for x in range(0, assetnum):
                 x = str(x + 1)
-                try:
-                    old['old_asset{0}'.format(x)] = new_balance['balance_asset{0}'.format(x)]
-                except:
-                    pass
+                old['old_asset{0}'.format(x)] = new_balance['balance_asset{0}'.format(x)]
 
             olddata = {'old': old, 'old_cash': old_cash}
 
-            with open('gemini/old.json', 'w') as outfile:
+            with open('bitfinex3/old.json', 'w') as outfile:
                 json.dump(olddata, outfile)
 
             configcheck = 'configured'
@@ -180,9 +137,6 @@ def setup():
                 threshold = input("Algorithm Threshold= ")
                 threshold = float(threshold)
                 threshold = (.01 * threshold)
-
-                print("Initializing...")
-
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -192,18 +146,15 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = input('Hourly, Daily, or Weekly: ').upper()
-
-                print("Initializing...")
-
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
                                  'algorithm': algorithm}
                 with open('gemini/config.json', 'w') as outfile:
                     json.dump(configuration, outfile)
-            if algorithm != 'THRESHOLD' and algorithm != 'PERIODIC':
-                print('Please check the spelling of' + " " + algorithm + ", and restart/retry.")
-                time.sleep(60)
+            else:
+                print('Please check the spelling of' + " " + algorithm)
+                exit(0)
 
         else:
             assetnum = config['assetnum']
@@ -216,14 +167,13 @@ def setup():
                 assets["asset{0}".format(x)] = config['assets']["asset{0}".format(x)]
                 assets["asset{0}".format(x)] = assets["asset{0}".format(x)].upper()
 
+            threshold = config['threshold']
             stablecoin = config['stablecoin']
-            if stablecoin == 'USDT':
-                stablecoin = 'USD'
             stablecoin = stablecoin.upper()
             symbol = {}
             for x in range(0, assetnum):
                 x = str(x + 1)
-                symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + '/' + stablecoin)
+                symbol["symbol_asset{0}".format(x)] = str(assets["asset{0}".format(x)] + stablecoin)
 
             configcheck = 'configured'
 
@@ -231,9 +181,6 @@ def setup():
 
             if algorithm == 'THRESHOLD':
                 threshold = config['threshold']
-
-                print("Initializing...")
-
                 configuration = {'assets': assets, 'threshold': threshold, 'configcheck': configcheck,
                                  'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
@@ -243,9 +190,6 @@ def setup():
                     json.dump(configuration, outfile)
             if algorithm == 'PERIODIC':
                 period = config['period']
-
-                print("Initializing...")
-
                 configuration = {'assets': assets, 'period': period, 'configcheck': configcheck, 'assetnum': assetnum,
                                  'stablecoin': stablecoin, 'symbol': symbol, 'API_KEY': API_KEY,
                                  'API_SECRET': API_SECRET,
@@ -257,50 +201,33 @@ def setup():
 def balances():
     # Pull  balance for each selected asset
     global cash_balance
-    global e
-    # Cash Balance
+    global balance
+
+    # Balance USD
     attempt = False
     while attempt is False:
         try:
-            cash_balance = client.fetch_balance()[stablecoin]['total']
+            balances = client.get_balance()
             attempt = True
-        except ccxt.BaseError as e:
-            pass
-            time.sleep(2)
-        except AttributeError:
-            time.sleep(2)
-            pass
         except ConnectionError:
-            time.sleep(2)
-            pass
-        except KeyError as e:
-            cash_balance = 0.0
-            time.sleep(2)
-            attempt = True
-        time.sleep(1)
+            time.sleep(3)
+            balances = client.get_balance()
+        except ValueError:
+            time.sleep(3)
+            balances = client.get_balance()
     # Get Balances of each previously entered asset
     balance = {}
     for x in range(0, assetnum):
         x = str(x + 1)
-        attempt = False
-        while attempt is False:
-            try:
-                balance['balance_asset{0}'.format(x)] = float(client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
-                attempt = True
-            except ConnectionError:
-                time.sleep(2)
-                pass
-            except KeyError as e:
-                balance['balance_asset{0}'.format(x)] = 0.0
-                time.sleep(2)
-                attempt = True
-            except AttributeError:
-                time.sleep(2)
-                pass
-            except ccxt.BaseError as e:
-                time.sleep(2)
-                pass
-        time.sleep(1)
+        for b in balances:
+            if b['currency'] == assets["asset{0}".format(x)]:
+                balance["balance_asset{0}".format(x)] = [b['amount']][0]
+                balance["balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
+            if "balance_asset{0}".format(x) not in balance:
+                balance["balance_asset{0}".format(x)] = 0
+            if b['currency'] == stablecoin:
+                cash_balance = b['amount']
+                cash_balance = float(cash_balance)
     # save balances to json
     balance.update({'cash_balance': cash_balance})
     with open('gemini/balance.json', 'w') as outfile:
@@ -309,26 +236,21 @@ def balances():
 
 def prices():
     global price
-    global e
-    # Grabs prices from Coinbase Pro
+    # Grabs prices from Gemini
     price = {}
     for x in range(0, assetnum):
         x = str(x + 1)
         attempt = False
         while attempt is False:
             try:
-                price["price_asset{0}".format(x)] = client.fetch_ticker(symbol["symbol_asset{0}".format(x)])['last']
+                price["price_asset{0}".format(x)] = float(client.get_ticker(symbol["symbol_asset{0}".format(x)])['last'])
                 attempt = True
             except ConnectionError:
-                time.sleep(2)
+                time.sleep(3)
                 pass
-            except AttributeError:
-                time.sleep(1)
+            except ValueError:
+                time.sleep(3)
                 pass
-            except ccxt.BaseError:
-                time.sleep(1)
-                pass
-            time.sleep(1)
     # saves to json
     with open('gemini/prices.json', 'w') as outfile:
         json.dump(price, outfile)
@@ -376,48 +298,56 @@ def deviation():
         dev["dev_asset{0}".format(x)] = float(dev["dev_asset{0}".format(x)])
 
 
-def sell_order(pair, sell_asset, current_price, asset):
+def sell_order(asset, sell_asset, current_price, currency):
 
-    sell_asset = float(sell_asset)
-    markets = client.fetch_markets()
-    time.sleep(3)
+    if currency == 'LTC':
+        sell_asset = truncate(sell_asset, 2)
+    if currency == 'BTC':
+        sell_asset = truncate(sell_asset, 5)
+    if currency == 'BCH':
+        sell_asset = truncate(sell_asset, 3)
+    else:
+        sell_asset = truncate(sell_asset, 3)
+    value = float(client.get_ticker(asset)['last']) * float(sell_asset)
+    side = str('sell')
+    sell_asset = str(sell_asset)
+    asset = str(asset)
 
-    pairing = str(str(asset) + "/" + str(stablecoin))
-
-    def minimums():
-        for m in markets:
-            if m['symbol'] == str(pairing):
-                return float(m['limits']['amount']['min'])
-
-    minimum = minimums()
-
-    if sell_asset >= minimum:
-        print("Selling" + " " + str(sell_asset) + " " + "of" + " " + pair)
-        client.create_order(symbol=pair, type='market', side='sell', amount=sell_asset, price=current_price)
-        time.sleep(1.25)
+    if value >= 10:
+        print(
+            "Selling" + " " + sell_asset + " " + "of" + " " + asset)
+        current_price = (current_price * .5)
+        current_price = round(current_price)
+        current_price = str(current_price)
+        client.new_order(symbol=asset, amount=sell_asset, price=current_price, side=side)
+        time.sleep(1)
 
 
-def buy_order(pair, buy_asset, current_price, asset):
+def buy_order(asset, buy_asset, current_price, currency):
 
-    buy_asset = float(buy_asset)
-    markets = client.fetch_markets()
-    time.sleep(3)
+    if currency == 'LTC':
+        buy_asset = truncate(buy_asset, 2)
+    if currency == 'BTC':
+        buy_asset = truncate(buy_asset, 5)
+    if currency == 'BCH':
+        buy_asset = truncate(buy_asset, 3)
+    else:
+        buy_asset = truncate(buy_asset, 3)
 
-    pairing = str(str(asset) + "/" + str(stablecoin))
+    value = float(client.get_ticker(asset)['last']) * float(buy_asset)
+    side = str('buy')
+    buy_asset = str(buy_asset)
+    asset = str(asset)
+    if value >= 10:
+        print(
+            "Buying" + " " + buy_asset + " " + "of" + " " + asset)
+        current_price = (current_price * 1.05)
+        current_price = round(current_price)
+        current_price = str(current_price)
+        client.new_order(symbol=asset, amount=buy_asset, price=current_price, side=side)
+        time.sleep(1)
 
-    def minimums():
-        for m in markets:
-            if m['symbol'] == str(pairing):
-                return float(m['limits']['amount']['min'])
-
-    minimum = minimums()
-
-    if buy_asset >= minimum:
-        print("Buying" + " " + str(buy_asset) + " " + "of" + " " + pair)
-        client.create_order(symbol=pair, type='market', side='buy', amount=buy_asset, price=current_price)
-        time.sleep(1.25)
-
-# MAIN
+    # MAIN
 
 
 setup()
@@ -426,29 +356,30 @@ with open('gemini/config.json') as json_file:
     config = json.load(json_file)
 
 api_key = config['API_KEY']
-api_secret = config['API_SECRET']
+api_private = config['API_SECRET']
 
-client = ccxt.gemini({'apiKey': api_key, 'secret': api_secret, 'enableRateLimit': True})
+client = gemini.PrivateClient(api_key, api_private)
 
 allocation = (.99 / assetnum)
 
 with open('gemini/initial.json') as json_file:
     initial = json.load(json_file)
     initialcheck = initial['initialcheck']
+with open('gemini/balance.json') as json_file:
+    balance = json.load(json_file)
+with open('gemini/prices.json') as json_file:
+    price = json.load(json_file)
 
 if initialcheck != 'done':
     initial = {}
     balances()
-    with open('gemini/balance.json') as json_file:
-        balance = json.load(json_file)
     for x in range(0, assetnum):
         x = str(x + 1)
         initial["initial_balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
     initialcheck = 'done'
     count = 0
     data = {'initial': initial,
-            'initialcheck': initialcheck,
-            'initialcheck2': ""}
+            'initialcheck': initialcheck}
     data2 = {'count': count}
 
     with open('gemini/count.json', 'w') as outfile:
@@ -461,6 +392,7 @@ else:
     with open('gemini/count.json') as json_file:
         counts = json.load(json_file)
     count = int(counts['count'])
+
 algorithm = config['algorithm']
 
 if algorithm == 'THRESHOLD':
@@ -472,11 +404,6 @@ if algorithm == 'THRESHOLD':
         balances()
 
         prices()
-
-        with open('gemini/balance.json') as json_file:
-            balance = json.load(json_file)
-        with open('gemini/prices.json') as json_file:
-            price = json.load(json_file)
 
         usd_value()
 
@@ -499,36 +426,26 @@ if algorithm == 'THRESHOLD':
             balances()
             usd_value()
             deviation()
-            time.sleep(2)
             if dev["dev_asset{0}".format(x)] > config['threshold']:
                 # Calculate # of shares to sell
                 dif = {}
                 sell = {}
                 goal_allocation = total_usd * allocation
-                for x in range(0, assetnum):
-                    x = str(x + 1)
+                for y in range(0, assetnum):
+                    y = str(y + 1)
                     usd_value()
-                    dif["dif_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - goal_allocation
-                    sell["sell_asset{0}".format(x)] = float(dif["dif_asset{0}".format(x)]) / float(price['price_asset{0}'.format(x)])
-                    sell["sell_asset{0}".format(x)] = float(sell["sell_asset{0}".format(x)])
+                    dif["dif_asset{0}".format(y)] = usd["usd_asset{0}".format(y)] - goal_allocation
+                    sell["sell_asset{0}".format(y)] = float(dif["dif_asset{0}".format(y)]) / float(price['price_asset{0}'.format(y)])
+                    sell["sell_asset{0}".format(y)] = float(sell["sell_asset{0}".format(y)])
 
                 # Sell order API call
-                    if sell["sell_asset{0}".format(x)] > 0:
-                            sell_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                                       price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
-                for x in range(0, assetnum):
-                    x = str(x + 1)
-                    if sell["sell_asset{0}".format(x)] < 0:
-                            sell["sell_asset{0}".format(x)] = (-1 * sell["sell_asset{0}".format(x)])
-                            buy_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                                       price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
-        time.sleep(3)
-        balances()
-        prices()
-        usd_value()
-        deviation()
+                    if sell["sell_asset{0}".format(y)] > 0:
+                        sell_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)], price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+                for y in range(0, assetnum):
+                    y = str(y + 1)
+                    if sell["sell_asset{0}".format(y)] < 0:
+                        sell["sell_asset{0}".format(y)] = (-1 * sell["sell_asset{0}".format(y)])
+                        buy_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)], price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
 
         # Buy order trade trigger
         negative_threshold = (-1 * config['threshold'])
@@ -537,39 +454,35 @@ if algorithm == 'THRESHOLD':
             balances()
             usd_value()
             deviation()
-            time.sleep(2)
-            if dev["dev_asset{0}".format(x)] <= negative_threshold:
+            if dev["dev_asset{0}".format(x)] < negative_threshold:
 
                 # Calculate # of shares to buy
                 dif = {}
                 buy = {}
                 goal_allocation = total_usd * allocation
-                for x in range(0, assetnum):
-                    x = str(x + 1)
+                for y in range(0, assetnum):
+                    y = str(y + 1)
                     usd_value()
-                    dif["dif_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - goal_allocation
-                    buy["buy_asset{0}".format(x)] = float(dif["dif_asset{0}".format(x)]) / float(price['price_asset{0}'.format(x)])
-                    buy["buy_asset{0}".format(x)] = float(-1 * buy["buy_asset{0}".format(x)])
+                    dif["dif_asset{0}".format(y)] = usd["usd_asset{0}".format(y)] - goal_allocation
+                    buy["buy_asset{0}".format(y)] = float(dif["dif_asset{0}".format(y)]) / float(price['price_asset{0}'.format(y)])
+                    buy["buy_asset{0}".format(y)] = float(-1 * buy["buy_asset{0}".format(y)])
 
                 # Buy order API call
-                    if buy["buy_asset{0}".format(x)] < 0:
-                            sellasset = ( -1 * buy["buy_asset{0}".format(x)])
-                            sell_order(config['symbol']["symbol_asset{0}".format(x)], sellasset,
-                                      price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
+                    if buy["buy_asset{0}".format(y)] < 0:
+                        sellasset = (-1 * buy["buy_asset{0}".format(y)])
+                        sell_order(symbol["symbol_asset{0}".format(y)], sellasset, price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+                for y in range(0, assetnum):
+                    y = str(y + 1)
+                    if buy["buy_asset{0}".format(y)] > 0:
+                        buy_order(symbol["symbol_asset{0}".format(y)], buy["buy_asset{0}".format(y)], price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
 
-                for x in range(0, assetnum):
-                    x = str(x + 1)
-                    if buy["buy_asset{0}".format(x)] > 0:
-                            buy_order(config['symbol']["symbol_asset{0}".format(x)], buy["buy_asset{0}".format(x)],
-                              price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
+        time.sleep(3)
         balances()
         prices()
         usd_value()
-        deviation()
 
         # Record data every half day
-        multiples = [n for n in range(1, 99999) if n % (200*assetnum) == 0]
+        multiples = [n for n in range(1, 99999) if n % 1000 == 0]
         if count in multiples:
             # Checks for previous runs and calculates gain over initial allocation
             with open('gemini/performance.json') as json_file:
@@ -577,6 +490,9 @@ if algorithm == 'THRESHOLD':
                 initialcheck2 = performance['initialcheck2']
 
             if initialcheck2 != 'done':
+                global old
+                global compare
+                global profit
 
                 compare = {}
                 old = {}
@@ -590,10 +506,7 @@ if algorithm == 'THRESHOLD':
                                 price["price_asset{0}".format(x)])
 
                     # save current balances for future reference
-                    try:
-                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
-                    except:
-                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
+                    old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
 
                     # calculate profit of current usd value vs initial balance usd value
                     compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
@@ -620,7 +533,7 @@ if algorithm == 'THRESHOLD':
 
                 data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
 
-                olddata = {'old': old, 'old_cash': old_cash}
+                olddata= {'old': old, 'old_cash': old_cash}
 
                 with open('gemini/old.json', 'w') as outfile:
                     json.dump(olddata, outfile)
@@ -649,7 +562,9 @@ if algorithm == 'THRESHOLD':
                     # calculate profit of current usd value vs previous iteration balance usd value
                     compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
                     profit["profit_asset{0}".format(x)] = (usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
+
                 old_cash = float(oldload['old_cash'])
+
                 # calculate profit over previous cash pool
                 profit_cash = cash_balance - old_cash
 
@@ -694,73 +609,32 @@ if algorithm == 'THRESHOLD':
                         json.dump(data, outfile)
 
                 # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                if performance['profit']['overall'] > 400:
+                if performance['profit']['overall'] > 200:
                     # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                    highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                    hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                     for a in assets:
-                        if str('dev_' + a) == str(highest):
+                        if str('dev_' + a) == str(hmm):
                             print('Initiating Donation.')
-                            donation_amount = (performance['profit']['overall'] * .075)
+                            donation_amount = (performance['profit']['overall'] * .10)
 
                             # Sell Highest Deviation
                             theasset = config['assets'][str(a)]
 
-                            highest_asset = str(theasset + "/" + stablecoin)
-
-                            try:
-                                price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                time.sleep(2)
-                            except ccxt.base.errors.DDoSProtection as e:
-                                print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                time.sleep(2)
-                                price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                            except ccxt.base.errors.RequestTimeout as e:
-                                time.sleep(1)
-                                print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                            except ccxt.base.errors.ExchangeNotAvailable as e:
-                                time.sleep(1)
-                                print(type(e).__name__, e.args,
-                                      'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                            except ccxt.base.errors.AuthenticationError as e:
-                                time.sleep(1)
-                                print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                                price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                            time.sleep(1)
-
+                            highest_asset = str(theasset + stablecoin)
+                            price_asset = float(client.get_ticker(str(highest_asset))['last'])
                             asset_amount = float(donation_amount / price_asset)
                             print('Donating' + ' ' + str(donation_amount) + " " + 'of' + ' ' + str(
                                 performance['profit']['overall']) + " " + "dollars" + " " + "profit generated by this algorithm.")
                             sell_order(highest_asset, asset_amount, price_asset, theasset)
 
                             # Buy Eth
+
                             def stablecoincheck():
                                 if stablecoin != 'ETH':
-                                    eth_symbol = str('ETH' + "/" + stablecoin)
-                                    try:
-                                        price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        time.sleep(2)
-                                    except ccxt.base.errors.DDoSProtection as e:
-                                        print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                        time.sleep(2)
-                                        price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                    except ccxt.base.errors.RequestTimeout as e:
-                                        time.sleep(1)
-                                        print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                        price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                    except ccxt.base.errors.ExchangeNotAvailable as e:
-                                        time.sleep(1)
-                                        print(type(e).__name__, e.args,
-                                              'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                        price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                    except ccxt.base.errors.AuthenticationError as e:
-                                        time.sleep(1)
-                                        print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                                        price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                    time.sleep(1)
+                                    eth_symbol = str('ETH' + stablecoin)
+                                    price_eth = float(client.get_ticker(eth_symbol)['last'])
                                     eth_amount = float((donation_amount / price_eth) * .95)
                                     buy_order(eth_symbol, eth_amount, price_eth, 'ETH')
                                     return eth_amount
@@ -769,11 +643,15 @@ if algorithm == 'THRESHOLD':
                                     return eth_amount
                             eth_amount = stablecoincheck()
 
-                            # Withdraw Eth, requires Whitelist 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C
+                            # Withdraw Eth, Must be Whitelisted address and API privelege
                             eth_withdraw = eth_amount * .98
-                            eth_withdraw = truncate(eth_withdraw, 6)
+                            eth_withdraw = truncate(eth_withdraw, 5)
                             print("Withdrawing" + " " + str(eth_withdraw) + "ETH" + " " + "as a donation to the Developers / Nescience")
-                            client.withdraw("ETH", eth_withdraw, "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C")
+                            withdraw = str(client.withdraw_to_address("ETH", "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C", str(eth_withdraw)))
+                            if 'error' in withdraw:
+                                print('Ensure you have whitelisted ETH withdrawals to this address: 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C')
+                                print('If you have not, the AI cannot process donations/payments.')
+                                exit(0)
                             # Set overall profit back to 0
                             overall_update = 0
                             profit.update({'overall': overall_update})
@@ -801,11 +679,6 @@ if algorithm == 'PERIODIC':
 
             prices()
 
-            with open('gemini/balance.json') as json_file:
-                balance = json.load(json_file)
-            with open('gemini/prices.json') as json_file:
-                price = json.load(json_file)
-
             usd_value()
 
             deviation()
@@ -825,26 +698,26 @@ if algorithm == 'PERIODIC':
             dif = {}
             sell = {}
             goal_allocation = total_usd * allocation
-            for x in range(0, assetnum):
-                x = str(x + 1)
+            for y in range(0, assetnum):
+                y = str(y + 1)
                 usd_value()
-                dif["dif_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - goal_allocation
-                sell["sell_asset{0}".format(x)] = float(dif["dif_asset{0}".format(x)]) / float(
-                    price['price_asset{0}'.format(x)])
-                sell["sell_asset{0}".format(x)] = float(sell["sell_asset{0}".format(x)])
+                dif["dif_asset{0}".format(y)] = usd["usd_asset{0}".format(y)] - goal_allocation
+                sell["sell_asset{0}".format(y)] = float(dif["dif_asset{0}".format(y)]) / float(
+                    price['price_asset{0}'.format(y)])
+                sell["sell_asset{0}".format(y)] = float(sell["sell_asset{0}".format(y)])
 
                 # Sell order API call
-                if sell["sell_asset{0}".format(x)] > 0:
-                    sell_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                               price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
+                if sell["sell_asset{0}".format(y)] > 0:
+                    sell_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                               price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+            for y in range(0, assetnum):
+                y = str(y + 1)
+                if sell["sell_asset{0}".format(y)] < 0:
+                    sell["sell_asset{0}".format(y)] = (-1 * sell["sell_asset{0}".format(y)])
+                    buy_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                              price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
 
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                if sell["sell_asset{0}".format(x)] < 0:
-                    sell["sell_asset{0}".format(x)] = (-1 * sell["sell_asset{0}".format(x)])
-                    buy_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                              price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
+            time.sleep(3)
             balances()
             prices()
             usd_value()
@@ -859,288 +732,9 @@ if algorithm == 'PERIODIC':
                     initialcheck2 = performance['initialcheck2']
 
                 if initialcheck2 != 'done':
-
-                    compare = {}
-                    old = {}
-                    profit = {}
-
-                    for x in range(0, assetnum):
-                        x = str(x + 1)
-                        # calculate today's value of initial balances
-                        compare["compare_asset{0}".format(x)] = (
-                                initial['initial']["initial_balance_asset{0}".format(x)] *
-                                price["price_asset{0}".format(x)])
-
-                        # save current balances for future reference
-                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
-
-                        # calculate profit of current usd value vs initial balance usd value
-                        compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
-                        profit["profit_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)]
-                    old_cash = cash_balance
-
-                    # calculate profits of the small cash pool
-                    profit_cash = old_cash - cash_balance
-                    profit["current"] = 0
-
-                    # calculate current profits of the overall portfolio
-                    for x in range(0, assetnum):
-                        x = str(x + 1)
-                        profit["current"] = profit["current"] + profit["profit_asset{0}".format(x)]
-                    profit["current"] = profit["current"] + profit_cash
-
-                    # If portfolio > previous iteration, add to overall profit
-                    profit["overall"] = 0
-
-                    if profit["current"] >= 0:
-                        profit["overall"] = profit["current"] + profit["overall"]
-
-                    initialcheck2 = 'done'
-
-                    data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
-
-                    olddata = {'old': old, 'old_cash': old_cash}
-
-                    with open('gemini/old.json', 'w') as outfile:
-                        json.dump(olddata, outfile)
-
-                    with open('gemini/performance.json', 'w') as outfile:
-                        json.dump(data, outfile)
-                    # if not the initial setup, load previous iterations and calculate differences and profit
-                else:
-                    with open('gemini/performance.json') as json_file:
-                        performance = json.load(json_file)
-                    with open('gemini/old.json') as json_file:
-                        oldload = json.load(json_file)
-                    compare = {}
-                    old = {}
-                    profit = {}
-
-                    for x in range(0, assetnum):
-                        x = str(x + 1)
-                        # call old asset balance from Performance and set as new old asset dict
-                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
-
-                        # calculate today's value of previous balances
-                        compare["compare_asset{0}".format(x)] = (
-                                old["old_asset{0}".format(x)] * price["price_asset{0}".format(x)])
-
-                        # calculate profit of current usd value vs previous iteration balance usd value
-                        compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
-                        profit["profit_asset{0}".format(x)] = (
-                                    usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
-                    old_cash = float(oldload['old_cash'])
-                    # calculate profit over previous cash pool
-                    profit_cash = cash_balance - old_cash
-
-                    # overwrite previous iteration balances save current balances for future reference
-                    for x in range(0, assetnum):
-                        x = str(x + 1)
-                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
-
-                    # calculate current profits of the overall portfolio
-                    profit['current'] = 0
-                    for x in range(0, assetnum):
-                        x = str(x + 1)
-                        profit['current'] = profit['current'] + profit["profit_asset{0}".format(x)]
-                    profit['current'] = profit['current'] + profit_cash
-                    old_cash = cash_balance
-
-                    # If portfolio > previous iteration, add to overall profit
-                    profit['overall'] = performance['profit']['overall']
-                    initialcheck2 = 'done'
-                    if profit['current'] >= 0:
-                        profit['overall'] = profit['current'] + profit['overall']
-
-                        data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
-
-                        olddata = {'old': old, 'old_cash': old_cash}
-
-                        with open('gemini/old.json', 'w') as outfile:
-                            json.dump(olddata, outfile)
-
-                        with open('gemini/performance.json', 'w') as outfile:
-                            json.dump(data, outfile)
-
-                    else:
-                        data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
-
-                        olddata = {'old': old, 'old_cash': old_cash}
-
-                        with open('gemini/old.json', 'w') as outfile:
-                            json.dump(olddata, outfile)
-
-                        with open('gemini/performance.json', 'w') as outfile:
-                            json.dump(data, outfile)
-
-                    # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 400:
-                        # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
-
-                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
-
-                        for a in assets:
-                            if str('dev_' + a) == str(highest):
-                                print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .075)
-
-                                # Sell Highest Deviation
-                                theasset = config['assets'][str(a)]
-
-                                highest_asset = str(theasset + "/" + stablecoin)
-
-                                try:
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                    time.sleep(2)
-                                except ccxt.base.errors.DDoSProtection as e:
-                                    print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                    time.sleep(2)
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.RequestTimeout as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.ExchangeNotAvailable as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args,
-                                          'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.AuthenticationError as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                time.sleep(1)
-
-                                asset_amount = float(donation_amount / price_asset)
-                                print('Donating' + ' ' + str(donation_amount) + " " + 'of' + ' ' + str(
-                                    performance['profit'][
-                                        'overall']) + " " + "dollars" + " " + "profit generated by this algorithm.")
-                                sell_order(highest_asset, asset_amount, price_asset, theasset)
-
-
-                                # Buy Eth
-                                def stablecoincheck():
-                                    if stablecoin != 'ETH':
-                                        eth_symbol = str('ETH' + "/" + stablecoin)
-                                        try:
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                            time.sleep(2)
-                                        except ccxt.base.errors.DDoSProtection as e:
-                                            print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                            time.sleep(2)
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.RequestTimeout as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.ExchangeNotAvailable as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.AuthenticationError as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Authentication Error (missing API keys, ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        time.sleep(1)
-                                        eth_amount = float((donation_amount / price_eth) * .95)
-                                        buy_order(eth_symbol, eth_amount, price_eth, 'ETH')
-                                        return eth_amount
-                                    else:
-                                        eth_amount = (donation_amount * .99)
-                                        return eth_amount
-
-
-                                eth_amount = stablecoincheck()
-
-                                # Withdraw Eth, requires Whitelist 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C
-                                eth_withdraw = eth_amount * .98
-                                eth_withdraw = truncate(eth_withdraw, 6)
-                                print("Withdrawing" + " " + str(
-                                    eth_withdraw) + "ETH" + " " + "as a donation to the Developers / Nescience")
-                                client.withdraw("ETH", eth_withdraw, "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C")
-                                # Set overall profit back to 0
-                                overall_update = 0
-                                profit.update({'overall': overall_update})
-                                data.update({'profit': profit})
-                                with open('gemini/performance.json', 'w') as outfile:
-                                    json.dump(data, outfile)
-
-            count = count + 1
-            if count == 95760:
-                count = 0
-            data3 = {'count': count}
-            with open('gemini/count.json', 'w') as outfile:
-                json.dump(data3, outfile)
-            time.sleep(3600)
-
-    if period == 'DAILY':
-
-        while count < 99999:
-
-            balances()
-
-            prices()
-
-            with open('gemini/balance.json') as json_file:
-                balance = json.load(json_file)
-            with open('gemini/prices.json') as json_file:
-                price = json.load(json_file)
-
-            usd_value()
-
-            deviation()
-
-            # print date and asset deviations
-
-            print(datetime.datetime.now().time())
-            print('Portfolio Value:' + " " + " " + str(total_usd) + " " + str(stablecoin))
-
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                print(
-                    "Asset: " + assets["asset{0}".format(x)] + " :::: " + "Current Variation: " + str(
-                        dev["dev_asset{0}".format(x)] * 100) + "%")
-
-            # Calculate # of shares to sell
-            dif = {}
-            sell = {}
-            goal_allocation = total_usd * allocation
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                usd_value()
-                dif["dif_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - goal_allocation
-                sell["sell_asset{0}".format(x)] = float(dif["dif_asset{0}".format(x)]) / float(
-                    price['price_asset{0}'.format(x)])
-                sell["sell_asset{0}".format(x)] = float(sell["sell_asset{0}".format(x)])
-
-                # Sell order API call
-                if sell["sell_asset{0}".format(x)] > 0:
-                    sell_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                               price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                if sell["sell_asset{0}".format(x)] < 0:
-                    sell["sell_asset{0}".format(x)] = (-1 * sell["sell_asset{0}".format(x)])
-                    buy_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                              price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
-            balances()
-            prices()
-            usd_value()
-            deviation()
-
-            # Record data every half day
-            multiples = [n for n in range(1, 99999) if n % 4 == 0]
-            if count in multiples:
-                # Checks for previous runs and calculates gain over initial allocation
-                with open('gemini/performance.json') as json_file:
-                    performance = json.load(json_file)
-                    initialcheck2 = performance['initialcheck2']
-
-                if initialcheck2 != 'done':
+                    global old
+                    global compare
+                    global profit
 
                     compare = {}
                     old = {}
@@ -1211,8 +805,10 @@ if algorithm == 'PERIODIC':
                         # calculate profit of current usd value vs previous iteration balance usd value
                         compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
                         profit["profit_asset{0}".format(x)] = (
-                                usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
+                                    usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
+
                     old_cash = float(oldload['old_cash'])
+
                     # calculate profit over previous cash pool
                     profit_cash = cash_balance - old_cash
 
@@ -1257,77 +853,33 @@ if algorithm == 'PERIODIC':
                             json.dump(data, outfile)
 
                     # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 400:
+                    if performance['profit']['overall'] > 200:
                         # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                         for a in assets:
-                            if str('dev_' + a) == str(highest):
+                            if str('dev_' + a) == str(hmm):
                                 print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .075)
+                                donation_amount = (performance['profit']['overall'] * .10)
 
                                 # Sell Highest Deviation
                                 theasset = config['assets'][str(a)]
 
-                                highest_asset = str(theasset + "/" + stablecoin)
-
-                                try:
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                    time.sleep(2)
-                                except ccxt.base.errors.DDoSProtection as e:
-                                    print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                    time.sleep(2)
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.RequestTimeout as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.ExchangeNotAvailable as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args,
-                                          'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.AuthenticationError as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args,
-                                          'Authentication Error (missing API keys, ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                time.sleep(1)
-
+                                highest_asset = str(theasset + stablecoin)
+                                price_asset = float(client.get_ticker(str(highest_asset))['last'])
                                 asset_amount = float(donation_amount / price_asset)
                                 print('Donating' + ' ' + str(donation_amount) + " " + 'of' + ' ' + str(
                                     performance['profit'][
                                         'overall']) + " " + "dollars" + " " + "profit generated by this algorithm.")
                                 sell_order(highest_asset, asset_amount, price_asset, theasset)
 
-
                                 # Buy Eth
+
                                 def stablecoincheck():
                                     if stablecoin != 'ETH':
-                                        eth_symbol = str('ETH' + "/" + stablecoin)
-                                        try:
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                            time.sleep(2)
-                                        except ccxt.base.errors.DDoSProtection as e:
-                                            print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                            time.sleep(2)
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.RequestTimeout as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.ExchangeNotAvailable as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.AuthenticationError as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Authentication Error (missing API keys, ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        time.sleep(1)
+                                        eth_symbol = str('ETH' + stablecoin)
+                                        price_eth = float(client.get_ticker(eth_symbol)['last'])
                                         eth_amount = float((donation_amount / price_eth) * .95)
                                         buy_order(eth_symbol, eth_amount, price_eth, 'ETH')
                                         return eth_amount
@@ -1338,12 +890,19 @@ if algorithm == 'PERIODIC':
 
                                 eth_amount = stablecoincheck()
 
-                                # Withdraw Eth, requires Whitelist 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C
+                                # Withdraw Eth, Must be Whitelisted address and API privelege
                                 eth_withdraw = eth_amount * .98
-                                eth_withdraw = truncate(eth_withdraw, 6)
+                                eth_withdraw = truncate(eth_withdraw, 5)
                                 print("Withdrawing" + " " + str(
                                     eth_withdraw) + "ETH" + " " + "as a donation to the Developers / Nescience")
-                                client.withdraw("ETH", eth_withdraw, "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C")
+                                withdraw = str(
+                                    client.withdraw_to_address("ETH", "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+                                                               str(eth_withdraw)))
+                                if 'error' in withdraw:
+                                    print(
+                                        'Ensure you have whitelisted ETH withdrawals to this address: 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C')
+                                    print('If you have not, the AI cannot process donations/payments.')
+                                    exit(0)
                                 # Set overall profit back to 0
                                 overall_update = 0
                                 profit.update({'overall': overall_update})
@@ -1357,20 +916,15 @@ if algorithm == 'PERIODIC':
             data3 = {'count': count}
             with open('gemini/count.json', 'w') as outfile:
                 json.dump(data3, outfile)
-            time.sleep(86400)
+            time.sleep(3600)
 
-    if period == 'WEEKLY':
+    if period == 'DAILY':
 
         while count < 99999:
 
             balances()
 
             prices()
-
-            with open('gemini/balance.json') as json_file:
-                balance = json.load(json_file)
-            with open('gemini/prices.json') as json_file:
-                price = json.load(json_file)
 
             usd_value()
 
@@ -1391,33 +945,33 @@ if algorithm == 'PERIODIC':
             dif = {}
             sell = {}
             goal_allocation = total_usd * allocation
-            for x in range(0, assetnum):
-                x = str(x + 1)
+            for y in range(0, assetnum):
+                y = str(y + 1)
                 usd_value()
-                dif["dif_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - goal_allocation
-                sell["sell_asset{0}".format(x)] = float(dif["dif_asset{0}".format(x)]) / float(
-                    price['price_asset{0}'.format(x)])
-                sell["sell_asset{0}".format(x)] = float(sell["sell_asset{0}".format(x)])
+                dif["dif_asset{0}".format(y)] = usd["usd_asset{0}".format(y)] - goal_allocation
+                sell["sell_asset{0}".format(y)] = float(dif["dif_asset{0}".format(y)]) / float(
+                    price['price_asset{0}'.format(y)])
+                sell["sell_asset{0}".format(y)] = float(sell["sell_asset{0}".format(y)])
 
                 # Sell order API call
-                if sell["sell_asset{0}".format(x)] > 0:
-                    sell_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                               price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
+                if sell["sell_asset{0}".format(y)] > 0:
+                    sell_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                               price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+            for y in range(0, assetnum):
+                y = str(y + 1)
+                if sell["sell_asset{0}".format(y)] < 0:
+                    sell["sell_asset{0}".format(y)] = (-1 * sell["sell_asset{0}".format(y)])
+                    buy_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                              price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
 
-            for x in range(0, assetnum):
-                x = str(x + 1)
-                if sell["sell_asset{0}".format(x)] < 0:
-                    sell["sell_asset{0}".format(x)] = (-1 * sell["sell_asset{0}".format(x)])
-                    buy_order(config['symbol']["symbol_asset{0}".format(x)], sell["sell_asset{0}".format(x)],
-                              price['price_asset{0}'.format(x)], config['assets']['asset{0}'.format(x)])
-
+            time.sleep(3)
             balances()
             prices()
             usd_value()
             deviation()
 
             # Record data every half day
-            multiples = [n for n in range(1, 99999) if n % 1 == 0]
+            multiples = [n for n in range(1, 99999) if n % 4 == 0]
             if count in multiples:
                 # Checks for previous runs and calculates gain over initial allocation
                 with open('gemini/performance.json') as json_file:
@@ -1425,6 +979,9 @@ if algorithm == 'PERIODIC':
                     initialcheck2 = performance['initialcheck2']
 
                 if initialcheck2 != 'done':
+                    global old
+                    global compare
+                    global profit
 
                     compare = {}
                     old = {}
@@ -1442,7 +999,8 @@ if algorithm == 'PERIODIC':
 
                         # calculate profit of current usd value vs initial balance usd value
                         compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
-                        profit["profit_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)]
+                        profit["profit_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - compare[
+                            "compare_asset{0}".format(x)]
                     old_cash = cash_balance
 
                     # calculate profits of the small cash pool
@@ -1495,7 +1053,9 @@ if algorithm == 'PERIODIC':
                         compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
                         profit["profit_asset{0}".format(x)] = (
                                     usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
+
                     old_cash = float(oldload['old_cash'])
+
                     # calculate profit over previous cash pool
                     profit_cash = cash_balance - old_cash
 
@@ -1540,76 +1100,33 @@ if algorithm == 'PERIODIC':
                             json.dump(data, outfile)
 
                     # If profit due to the algorithm exceeds $100, donate X% to Nescience
-                    if performance['profit']['overall'] > 400:
+                    if performance['profit']['overall'] > 200:
                         # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
 
-                        highest = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
 
                         for a in assets:
-                            if str('dev_' + a) == str(highest):
+                            if str('dev_' + a) == str(hmm):
                                 print('Initiating Donation.')
-                                donation_amount = (performance['profit']['overall'] * .075)
+                                donation_amount = (performance['profit']['overall'] * .10)
 
                                 # Sell Highest Deviation
                                 theasset = config['assets'][str(a)]
 
-                                highest_asset = str(theasset + "/" + stablecoin)
-
-                                try:
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                    time.sleep(2)
-                                except ccxt.base.errors.DDoSProtection as e:
-                                    print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                    time.sleep(2)
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.RequestTimeout as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.ExchangeNotAvailable as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args,
-                                          'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                except ccxt.base.errors.AuthenticationError as e:
-                                    time.sleep(1)
-                                    print(type(e).__name__, e.args, 'Authentication Error (missing API keys, ignoring)')
-                                    price_asset = float(client.fetch_ticker(str(highest_asset))['last'])
-                                time.sleep(1)
-
+                                highest_asset = str(theasset + stablecoin)
+                                price_asset = float(client.get_ticker(str(highest_asset))['last'])
                                 asset_amount = float(donation_amount / price_asset)
                                 print('Donating' + ' ' + str(donation_amount) + " " + 'of' + ' ' + str(
                                     performance['profit'][
                                         'overall']) + " " + "dollars" + " " + "profit generated by this algorithm.")
                                 sell_order(highest_asset, asset_amount, price_asset, theasset)
 
-
                                 # Buy Eth
+
                                 def stablecoincheck():
                                     if stablecoin != 'ETH':
-                                        eth_symbol = str('ETH' + "/" + stablecoin)
-                                        try:
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                            time.sleep(2)
-                                        except ccxt.base.errors.DDoSProtection as e:
-                                            print(type(e).__name__, e.args, 'DDoS Protection (ignoring)')
-                                            time.sleep(2)
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.RequestTimeout as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args, 'Request Timeout (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.ExchangeNotAvailable as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Exchange Not Available due to downtime or maintenance (ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        except ccxt.base.errors.AuthenticationError as e:
-                                            time.sleep(1)
-                                            print(type(e).__name__, e.args,
-                                                  'Authentication Error (missing API keys, ignoring)')
-                                            price_eth = float(client.fetch_ticker(str(eth_symbol))['last'])
-                                        time.sleep(1)
+                                        eth_symbol = str('ETH' + stablecoin)
+                                        price_eth = float(client.get_ticker(eth_symbol)['last'])
                                         eth_amount = float((donation_amount / price_eth) * .95)
                                         buy_order(eth_symbol, eth_amount, price_eth, 'ETH')
                                         return eth_amount
@@ -1620,12 +1137,266 @@ if algorithm == 'PERIODIC':
 
                                 eth_amount = stablecoincheck()
 
-                                # Withdraw Eth, requires Whitelist 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C
+                                # Withdraw Eth, Must be Whitelisted address and API privelege
                                 eth_withdraw = eth_amount * .98
-                                eth_withdraw = truncate(eth_withdraw, 6)
+                                eth_withdraw = truncate(eth_withdraw, 5)
                                 print("Withdrawing" + " " + str(
                                     eth_withdraw) + "ETH" + " " + "as a donation to the Developers / Nescience")
-                                client.withdraw("ETH", eth_withdraw, "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C")
+                                withdraw = str(
+                                    client.withdraw_to_address("ETH", "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+                                                               str(eth_withdraw)))
+                                if 'error' in withdraw:
+                                    print(
+                                        'Ensure you have whitelisted ETH withdrawals to this address: 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C')
+                                    print('If you have not, the AI cannot process donations/payments.')
+                                    exit(0)
+                                # Set overall profit back to 0
+                                overall_update = 0
+                                profit.update({'overall': overall_update})
+                                data.update({'profit': profit})
+                                with open('gemini/performance.json', 'w') as outfile:
+                                    json.dump(data, outfile)
+
+            count = count + 1
+            if count == 95760:
+                count = 0
+            data3 = {'count': count}
+            with open('gemini/count.json', 'w') as outfile:
+                json.dump(data3, outfile)
+            time.sleep(86400)
+
+    if period == 'WEEKLY':
+
+        while count < 99999:
+
+            balances()
+
+            prices()
+
+            usd_value()
+
+            deviation()
+
+            # print date and asset deviations
+
+            print(datetime.datetime.now().time())
+            print('Portfolio Value:' + " " + " " + str(total_usd) + " " + str(stablecoin))
+
+            for x in range(0, assetnum):
+                x = str(x + 1)
+                print(
+                    "Asset: " + assets["asset{0}".format(x)] + " :::: " + "Current Variation: " + str(
+                        dev["dev_asset{0}".format(x)] * 100) + "%")
+
+            # Calculate # of shares to sell
+            dif = {}
+            sell = {}
+            goal_allocation = total_usd * allocation
+            for y in range(0, assetnum):
+                y = str(y + 1)
+                usd_value()
+                dif["dif_asset{0}".format(y)] = usd["usd_asset{0}".format(y)] - goal_allocation
+                sell["sell_asset{0}".format(y)] = float(dif["dif_asset{0}".format(y)]) / float(
+                    price['price_asset{0}'.format(y)])
+                sell["sell_asset{0}".format(y)] = float(sell["sell_asset{0}".format(y)])
+
+                # Sell order API call
+                if sell["sell_asset{0}".format(y)] > 0:
+                    sell_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                               price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+            for y in range(0, assetnum):
+                y = str(y + 1)
+                if sell["sell_asset{0}".format(y)] < 0:
+                    sell["sell_asset{0}".format(y)] = (-1 * sell["sell_asset{0}".format(y)])
+                    buy_order(symbol["symbol_asset{0}".format(y)], sell["sell_asset{0}".format(y)],
+                              price["price_asset{0}".format(y)], config['assets']['asset{0}'.format(y)])
+
+            time.sleep(3)
+            balances()
+            prices()
+            usd_value()
+            deviation()
+
+            # Record data every half day
+            multiples = [n for n in range(1, 99999) if n % 4 == 0]
+            if count in multiples:
+                # Checks for previous runs and calculates gain over initial allocation
+                with open('gemini/performance.json') as json_file:
+                    performance = json.load(json_file)
+                    initialcheck2 = performance['initialcheck2']
+
+                if initialcheck2 != 'done':
+                    global old
+                    global compare
+                    global profit
+
+                    compare = {}
+                    old = {}
+                    profit = {}
+
+                    for x in range(0, assetnum):
+                        x = str(x + 1)
+                        # calculate today's value of initial balances
+                        compare["compare_asset{0}".format(x)] = (
+                                initial['initial']["initial_balance_asset{0}".format(x)] *
+                                price["price_asset{0}".format(x)])
+
+                        # save current balances for future reference
+                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
+
+                        # calculate profit of current usd value vs initial balance usd value
+                        compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
+                        profit["profit_asset{0}".format(x)] = usd["usd_asset{0}".format(x)] - compare[
+                            "compare_asset{0}".format(x)]
+                    old_cash = cash_balance
+
+                    # calculate profits of the small cash pool
+                    profit_cash = old_cash - cash_balance
+                    profit["current"] = 0
+
+                    # calculate current profits of the overall portfolio
+                    for x in range(0, assetnum):
+                        x = str(x + 1)
+                        profit["current"] = profit["current"] + profit["profit_asset{0}".format(x)]
+                    profit["current"] = profit["current"] + profit_cash
+
+                    # If portfolio > previous iteration, add to overall profit
+                    profit["overall"] = 0
+
+                    if profit["current"] >= 0:
+                        profit["overall"] = profit["current"] + profit["overall"]
+
+                    initialcheck2 = 'done'
+
+                    data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
+
+                    olddata = {'old': old, 'old_cash': old_cash}
+
+                    with open('gemini/old.json', 'w') as outfile:
+                        json.dump(olddata, outfile)
+
+                    with open('gemini/performance.json', 'w') as outfile:
+                        json.dump(data, outfile)
+                    # if not the initial setup, load previous iterations and calculate differences and profit
+                else:
+                    with open('gemini/performance.json') as json_file:
+                        performance = json.load(json_file)
+                    with open('gemini/old.json') as json_file:
+                        oldload = json.load(json_file)
+                    compare = {}
+                    old = {}
+                    profit = {}
+
+                    for x in range(0, assetnum):
+                        x = str(x + 1)
+                        # call old asset balance from Performance and set as new old asset dict
+                        old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
+
+                        # calculate today's value of previous balances
+                        compare["compare_asset{0}".format(x)] = (
+                                old["old_asset{0}".format(x)] * price["price_asset{0}".format(x)])
+
+                        # calculate profit of current usd value vs previous iteration balance usd value
+                        compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])
+                        profit["profit_asset{0}".format(x)] = (
+                                    usd["usd_asset{0}".format(x)] - compare["compare_asset{0}".format(x)])
+
+                    old_cash = float(oldload['old_cash'])
+
+                    # calculate profit over previous cash pool
+                    profit_cash = cash_balance - old_cash
+
+                    # overwrite previous iteration balances save current balances for future reference
+                    for x in range(0, assetnum):
+                        x = str(x + 1)
+                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
+
+                    # calculate current profits of the overall portfolio
+                    profit['current'] = 0
+                    for x in range(0, assetnum):
+                        x = str(x + 1)
+                        profit['current'] = profit['current'] + profit["profit_asset{0}".format(x)]
+                    profit['current'] = profit['current'] + profit_cash
+                    old_cash = cash_balance
+
+                    # If portfolio > previous iteration, add to overall profit
+                    profit['overall'] = performance['profit']['overall']
+                    initialcheck2 = 'done'
+                    if profit['current'] >= 0:
+                        profit['overall'] = profit['current'] + profit['overall']
+
+                        data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
+
+                        olddata = {'old': old, 'old_cash': old_cash}
+
+                        with open('gemini/old.json', 'w') as outfile:
+                            json.dump(olddata, outfile)
+
+                        with open('gemini/performance.json', 'w') as outfile:
+                            json.dump(data, outfile)
+
+                    else:
+                        data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
+
+                        olddata = {'old': old, 'old_cash': old_cash}
+
+                        with open('gemini/old.json', 'w') as outfile:
+                            json.dump(olddata, outfile)
+
+                        with open('gemini/performance.json', 'w') as outfile:
+                            json.dump(data, outfile)
+
+                    # If profit due to the algorithm exceeds $100, donate X% to Nescience
+                    if performance['profit']['overall'] > 200:
+                        # Sort Deviation for highest asset deviation and sell donation amount before buying equivalent ETH
+
+                        hmm = list(sum(sorted(dev.items(), key=lambda x: x[1], reverse=True), ()))[0]
+
+                        for a in assets:
+                            if str('dev_' + a) == str(hmm):
+                                print('Initiating Donation.')
+                                donation_amount = (performance['profit']['overall'] * .10)
+
+                                # Sell Highest Deviation
+                                theasset = config['assets'][str(a)]
+
+                                highest_asset = str(theasset + stablecoin)
+                                price_asset = float(client.get_ticker(str(highest_asset))['last'])
+                                asset_amount = float(donation_amount / price_asset)
+                                print('Donating' + ' ' + str(donation_amount) + " " + 'of' + ' ' + str(
+                                    performance['profit'][
+                                        'overall']) + " " + "dollars" + " " + "profit generated by this algorithm.")
+                                sell_order(highest_asset, asset_amount, price_asset, theasset)
+
+                                # Buy Eth
+
+                                def stablecoincheck():
+                                    if stablecoin != 'ETH':
+                                        eth_symbol = str('ETH' + stablecoin)
+                                        price_eth = float(client.get_ticker(eth_symbol)['last'])
+                                        eth_amount = float((donation_amount / price_eth) * .95)
+                                        buy_order(eth_symbol, eth_amount, price_eth, 'ETH')
+                                        return eth_amount
+                                    else:
+                                        eth_amount = (donation_amount * .99)
+                                        return eth_amount
+
+
+                                eth_amount = stablecoincheck()
+
+                                # Withdraw Eth, Must be Whitelisted address and API privelege
+                                eth_withdraw = eth_amount * .98
+                                eth_withdraw = truncate(eth_withdraw, 5)
+                                print("Withdrawing" + " " + str(
+                                    eth_withdraw) + "ETH" + " " + "as a donation to the Developers / Nescience")
+                                withdraw = str(
+                                    client.withdraw_to_address("ETH", "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+                                                               str(eth_withdraw)))
+                                if 'error' in withdraw:
+                                    print(
+                                        'Ensure you have whitelisted ETH withdrawals to this address: 0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C')
+                                    print('If you have not, the AI cannot process donations/payments.')
+                                    exit(0)
                                 # Set overall profit back to 0
                                 overall_update = 0
                                 profit.update({'overall': overall_update})
