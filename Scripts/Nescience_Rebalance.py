@@ -4,6 +4,9 @@ exchange = exchange.upper()
 if exchange == 'ALPACA':
     import Alpaca_refactored
 
+if exchange == 'ALLY':
+    import Ally
+
 if exchange == 'UPBIT':
     import UpbitPeriodic
 
@@ -34,11 +37,14 @@ if exchange == 'HUOBI' or exchange == 'HUOBIPRO':
 if exchange == 'KRAKEN':
     import KrakenPeriodic
 
-if exchange == 'LIQUID' or exchange == 'Quoine' or exchange == 'Quoinex' or exchange == 'Qryptos':
+if exchange == 'LIQUID' or exchange == 'QUOINE' or exchange == 'QUOINEX' or exchange == 'QRYPTOS':
     import LiquidPeriodic
 
 if exchange == 'OKEX':
     import OkExPeriodic
+
+if exchange == 'ROBINHOOD':
+    import Robinhood
 
 else:
     print('Please check the spelling of your exchange.')

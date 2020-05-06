@@ -121,17 +121,26 @@ def balances():
                 balance["balance_asset{0}".format(x)] = float(alpaca.get_position(assets[str('asset' + x)]).qty)
                 balance["balance_asset{0}".format(x)] = round(balance["balance_asset{0}".format(x)])
                 attempt = True
+                time.sleep(.5)
             except ConnectionError:
-                time.sleep(1)
+                time.sleep(5)
                 pass
             except requests.exceptions.HTTPError:
-                time.sleep(1)
+                time.sleep(5)
                 pass
             except requests.exceptions.ConnectionError:
-                time.sleep(1)
+                time.sleep(5)
                 pass
             except KeyError:
                 balance["balance_asset{0}".format(x)] = 0
+                attempt = True
+                time.sleep(.1)
+            except tradeapi.rest.APIError as e :
+                balance["balance_asset{0}".format(x)] = 0
+                print('asset ' + str(x) + ' ' + str(balance["balance_asset{0}".format(x)]))
+                attempt = True
+                time.sleep(.5)
+
 
 
 
@@ -154,6 +163,8 @@ def prices():
         while attempt is False:
             try:
                 price["price_asset{0}".format(x)] = float(alpaca.polygon.last_trade(assets["asset{0}".format(x)]).price)
+                print('asset ' + str(x) + ' ' + str(price["price_asset{0}".format(x)]))
+                time.sleep(.5)
                 attempt = True
             except ConnectionError:
                 time.sleep(1)
@@ -162,6 +173,9 @@ def prices():
                 time.sleep(1)
                 pass
             except requests.exceptions.HTTPError:
+                time.sleep(1)
+                pass
+            except:
                 time.sleep(1)
                 pass
 
@@ -216,28 +230,35 @@ def sell_order(asset, sell_asset):
     # Sell order logic
     sell_asset = round(sell_asset)
     market = str(alpaca.get_clock().is_open)
-    if market == 'True':
-        print("Selling" + " " + str(sell_asset) + " " + "of" + " " + str(asset))
-        alpaca.submit_order(
-            symbol=asset,
-            qty=sell_asset,
-            side='sell',
-            type='market',
-            time_in_force='gtc')
-
+    try:
+        if market == 'True':
+            print("Selling" + " " + str(sell_asset) + " " + "of" + " " + str(asset))
+            alpaca.submit_order(
+                symbol=asset,
+                qty=sell_asset,
+                side='sell',
+                type='market',
+                time_in_force='gtc')
+    except Exception as e:
+        print(e)
+        pass
 
 def buy_order(asset, buy_asset):
     # Buy order logic
     buy_asset = round(buy_asset)
     market = str(alpaca.get_clock().is_open)
-    if market == 'True':
-        print("Buying" + " " + str(buy_asset) + " " + "of" + " " + str(asset))
-        alpaca.submit_order(
-            symbol=asset,
-            qty=buy_asset,
-            side='buy',
-            type='market',
-            time_in_force='gtc')
+    try:
+        if market == 'True':
+            print("Buying" + " " + str(buy_asset) + " " + "of" + " " + str(asset))
+            alpaca.submit_order(
+                symbol=asset,
+                qty=buy_asset,
+                side='buy',
+                type='market',
+                time_in_force='gtc')
+    except Exception as e:
+        print(e)
+        pass
 
     # MAIN
 
@@ -258,7 +279,7 @@ SITE = config['SITE']
 
 alpaca = tradeapi.REST(API_KEY, API_SECRET, SITE, 'v2')
 
-allocation = (.985 / assetnum)
+allocation = (.999 / assetnum)
 
 if initialcheck != 'done':
     initial = {}
@@ -311,9 +332,6 @@ while count < 99999:
     # Sell order trade trigger
     for x in range(0, assetnum):
         x = str(x + 1)
-        balances()
-        usd_value()
-        deviation()
         if dev["dev_asset{0}".format(x)] >= config['threshold']:
             # Calculate # of shares to sell
             dif = {}
@@ -333,17 +351,14 @@ while count < 99999:
                 if sell["sell_asset{0}".format(x)] < 0:
                     sell["sell_asset{0}".format(x)] = (-1 * sell["sell_asset{0}".format(x)])
                     buy_order(assets["asset{0}".format(x)], sell["sell_asset{0}".format(x)])
-    time.sleep(3)
-    balances()
-    usd_value()
-    deviation()
+            balances()
+            prices()
+            usd_value()
+            deviation()
     # Buy order trade trigger
     negative_threshold = (-1 * config['threshold'])
     for x in range(0, assetnum):
         x = str(x + 1)
-        balances()
-        usd_value()
-        deviation()
         if dev["dev_asset{0}".format(x)] <= negative_threshold:
             dif = {}
             buy = {}
@@ -363,11 +378,10 @@ while count < 99999:
                 x = str(x + 1)
                 if buy["buy_asset{0}".format(x)] > 0:
                     buy_order(assets["asset{0}".format(x)], buy["buy_asset{0}".format(x)])
-    time.sleep(4)
-    balances()
-    usd_value()
-    deviation()
-
+            balances()
+            prices()
+            usd_value()
+            deviation()
 
     count = count + 1
     data3 = {'count': count}

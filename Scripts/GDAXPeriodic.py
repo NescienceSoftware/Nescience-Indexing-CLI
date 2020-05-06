@@ -240,19 +240,23 @@ def balances():
             pass
     # Get Balances of each previously entered asset
     balance = {}
-    for x in range(0, assetnum):
-        x = str(x + 1)
-        for b in balances:
-            if b['currency'] == assets["asset{0}".format(x)]:
-                balance['balance_asset{0}'.format(x)] = b['balance']
-                balance["balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
-            if "balance_asset{0}".format(x) not in balance:
-                balance["balance_asset{0}".format(x)] = 0
-            if b['currency'] == stablecoin:
-                balance["cash_balance"] = b['balance']
-                cash_balance = float(balance['cash_balance'])
-            if "cash_balance" not in balance:
-                cash_balance = 0
+    try:
+        for x in range(0, assetnum):
+            x = str(x + 1)
+            for b in balances:
+                if b['currency'] == assets["asset{0}".format(x)]:
+                    balance['balance_asset{0}'.format(x)] = b['balance']
+                    balance["balance_asset{0}".format(x)] = float(balance["balance_asset{0}".format(x)])
+                if "balance_asset{0}".format(x) not in balance:
+                    balance["balance_asset{0}".format(x)] = 0
+                if b['currency'] == stablecoin:
+                    balance["cash_balance"] = b['balance']
+                    cash_balance = float(balance['cash_balance'])
+                if "cash_balance" not in balance:
+                    cash_balance = 0
+    except Exception as e:
+        print(e)
+        pass
     # save balances to json
     balance.update({'cash_balance': cash_balance})
     with open('GDAX/balance.json', 'w') as outfile:
