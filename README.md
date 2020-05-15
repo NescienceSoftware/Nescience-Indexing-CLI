@@ -376,13 +376,7 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 #### Ally
 
-The Alpaca exchange is a clearinghouse for traditional equities that primarily supports algorithmic trading. 
 
-If interested, https://docs.alpaca.markets/ 
-
-Remember to save your API Key and API Secret somewhere safe!
-
-[Back To The Top](#table-of-contents)
 
 -----------------------------------------
 
