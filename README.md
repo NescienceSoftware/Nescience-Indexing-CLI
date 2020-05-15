@@ -63,7 +63,11 @@ This process is different on each exchange, with each exchange having unique res
 - [Poloniex](#Poloniex)
 - [Upbit](#Upbit)
 
-- [Alpaca](#Alpaca) NOTE: For legal reasons we do not provide the same level of support to those utilizing traditional market clearinghouse exchanges, use of our product does not constitute liability.
+- [Ally](#Ally)
+- [Alpaca](#Alpaca) 
+- [Robinhood](#Robinhood) 
+
+NOTE: For legal reasons we do not provide the same level of support to those utilizing traditional market clearinghouses/brokers, use of our product does not constitute liability.
 
 ---
 
