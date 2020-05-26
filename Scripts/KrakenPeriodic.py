@@ -256,6 +256,7 @@ def setup():
 
 def balances():
     # Pull  balance for each selected asset
+    global balance
     global cash_balance
     global e
     # Cash Balance

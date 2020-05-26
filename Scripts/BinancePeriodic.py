@@ -212,7 +212,7 @@ def setup():
 def balances():
     # Pull  balance for each selected asset
     global cash_balance
-
+    global balance
     # Balance USD
     attempt = False
     while attempt is False:

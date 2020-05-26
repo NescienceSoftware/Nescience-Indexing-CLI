@@ -254,6 +254,7 @@ def setup():
 
 def balances():
     # Pull  balance for each selected asset
+    global balance
     global cash_balance
     global e
     # Cash Balance
@@ -262,15 +263,8 @@ def balances():
         try:
             cash_balance = client.fetch_balance()[stablecoin]['total']
             attempt = True
-        except ccxt.BaseError as e:
-            pass
-            time.sleep(2)
-        except AttributeError:
-            time.sleep(2)
-            pass
-        except ConnectionError:
-            time.sleep(2)
-            pass
+        except Exception as e:
+            print(e)
         except KeyError as e:
             cash_balance = 0.0
             time.sleep(2)
@@ -285,19 +279,12 @@ def balances():
             try:
                 balance['balance_asset{0}'.format(x)] = float(client.fetch_balance()[assets['asset{0}'.format(x)]]['total'])
                 attempt = True
-            except ConnectionError:
-                time.sleep(2)
-                pass
             except KeyError as e:
                 balance['balance_asset{0}'.format(x)] = 0.0
                 time.sleep(2)
                 attempt = True
-            except AttributeError:
-                time.sleep(2)
-                pass
-            except ccxt.BaseError as e:
-                time.sleep(2)
-                pass
+            except Exception as e:
+                print(e)
         time.sleep(1)
     # save balances to json
     balance.update({'cash_balance': cash_balance})
