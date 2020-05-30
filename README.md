@@ -376,7 +376,7 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 #### Ally
 
-
+Ally has a unique API key schema. 
 
 -----------------------------------------
 
