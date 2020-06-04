@@ -376,7 +376,27 @@ However if you would like to utilize our AI on this exchange, ensure that all AP
 
 #### Ally
 
-Ally has a unique API key schema. 
+Ally has a unique API key schema, requiring 2 different API Key/Secret pairs.
+
+###### API Instructions
+
+1. Log in to your Ally invest portfolio.
+
+2. In the bar at the top, click "Tools"
+
+3. Select "API".
+
+4. Once navigating to the API page, click, "Create a new application"
+
+5. Select personal application and enter your information, with the application name being "Nescience Indexing Tool".
+
+6. Click "Create".
+
+7. Back on your API page, click the Nescience Indexing Tool under "Developer Applications"
+
+8. Copy paste all four API Keys/Secrets and save them in a safe place.
+
+---
 
 -----------------------------------------
 
