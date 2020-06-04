@@ -394,7 +394,7 @@ Ally has a unique API key schema, requiring 2 different API Key/Secret pairs.
 
 7. Back on your API page, click the Nescience Indexing Tool under "Developer Applications"
 
-8. Copy paste all four API Keys/Secrets and save them in a safe place.
+8. Copy all four API Keys/Secrets and save them in a safe place.
 
 ---
 
