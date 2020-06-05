@@ -398,10 +398,6 @@ Ally has a unique API key schema, requiring 2 different API Key/Secret pairs.
 
 ---
 
------------------------------------------
-
----
-
 #### Alpaca
 
 The Alpaca exchange is a clearinghouse for traditional equities that primarily supports algorithmic trading. 
