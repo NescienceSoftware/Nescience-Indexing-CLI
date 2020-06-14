@@ -645,7 +645,7 @@ if algorithm == 'THRESHOLD':
 
                 data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
 
-                olddata = {'old': old, old_cash: 'old_cash'}
+                olddata = {'old': old, 'old_cash': old_cash}
 
                 with open('binance/old.json', 'w') as outfile:
                     json.dump(olddata, outfile)
@@ -902,7 +902,7 @@ if algorithm == 'PERIODIC':
 
                     data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
 
-                    olddata = {'old': old, old_cash: 'old_cash'}
+                    olddata = {'old': old, 'old_cash': old_cash}
 
                     with open('binance/old.json', 'w') as outfile:
                         json.dump(olddata, outfile)
@@ -1154,7 +1154,7 @@ if algorithm == 'PERIODIC':
 
                     data = {'compare': compare, 'profit': profit, 'initialcheck2': initialcheck2}
 
-                    olddata = {'old': old, old_cash: 'old_cash'}
+                    olddata = {'old': old, 'old_cash': old_cash}
 
                     with open('binance/old.json', 'w') as outfile:
                         json.dump(olddata, outfile)
