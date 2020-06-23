@@ -594,7 +594,7 @@ if algorithm == 'THRESHOLD':
                     try:
                         old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
                     except:
-                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
+                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
 
                     # calculate profit of current usd value vs initial balance usd value
                     compare["compare_asset{0}".format(x)] = float(compare["compare_asset{0}".format(x)])

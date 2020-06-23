@@ -254,6 +254,7 @@ def setup():
 
 def balances():
     # Pull  balance for each selected asset
+    # Pull  balance for each selected asset
     global balance
     global cash_balance
     global e
@@ -625,7 +626,7 @@ if algorithm == 'THRESHOLD':
                     try:
                         old["old_asset{0}".format(x)] = oldload['old']["old_asset{0}".format(x)]
                     except:
-                        old["old_asset{0}".format(x)] = balance['balance']["balance_asset{0}".format(x)]
+                        old["old_asset{0}".format(x)] = balance["balance_asset{0}".format(x)]
 
                     # calculate today's value of previous balances
                     compare["compare_asset{0}".format(x)] = (
