@@ -40,6 +40,9 @@ if exchange == 'KRAKEN':
 if exchange == 'LIQUID' or exchange == 'QUOINE' or exchange == 'QUOINEX' or exchange == 'QRYPTOS':
     import LiquidPeriodic
 
+if exchange == 'LUNO':
+    import LunoPeriodic
+
 if exchange == 'OKEX':
     import OkExPeriodic
 
