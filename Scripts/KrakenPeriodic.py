@@ -469,6 +469,8 @@ else:
         with open('kraken/count.json', 'w') as outfile:
             json.dump(counts, outfile)
 
+algorithm = config['algorithm']
+
 if algorithm == 'THRESHOLD':
 
     threshold = config['threshold']
