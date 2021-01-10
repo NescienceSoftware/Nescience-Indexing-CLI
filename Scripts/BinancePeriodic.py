@@ -219,6 +219,7 @@ def balances():
         try:
             cash_balance = client.get_asset_balance(asset=stablecoin)['free']
             attempt = True
+            time.sleep(1)
         except OSError:
             time.sleep(2)
             pass
@@ -288,6 +289,7 @@ def prices():
             try:
                 price["price_asset{0}".format(x)] = float(client.get_ticker(symbol=symbol["symbol_asset{0}".format(x)])['lastPrice'])
                 attempt = True
+                time.sleep(1)
             except OSError:
                 time.sleep(2)
                 pass
